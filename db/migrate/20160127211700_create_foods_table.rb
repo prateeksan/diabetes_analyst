@@ -25,15 +25,7 @@ class CreateFoodsTable < ActiveRecord::Migration
       t.float :vitamin_c
       t.float :vitamin_b12
       t.timestamps
+    end
   end
 end
 
-
-
-
-
-
-"number","name","measure","weight","kcal","kj","protein","carbohydrate",
-          "total_sugar","total_dietary_fibre","total_fat","calcium","iron","sodium",
-          "potassium","magnesium","phosphorus","vitamin_a","beta_carotene","lycopene",
-          "folate","vitamin_c", "vitamin_b12"]
