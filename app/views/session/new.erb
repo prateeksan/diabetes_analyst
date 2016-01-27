@@ -1,0 +1,19 @@
+<% if @error %>
+    <p> <%= @error %> </p>
+<% end %>
+
+<h1>Sign In</h1>
+
+<form method="POST" action="/user/signin">
+  <div>
+    <label>Username</label>
+    <input type="text" name="username">
+  </div>
+  <div>
+    <label>Password</label>
+    <input type="password" name="password">
+  </div>
+  <div>
+    <input type="submit" value="submit">
+  </div>
+</form>
