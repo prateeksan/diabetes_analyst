@@ -46,9 +46,8 @@ ActiveRecord::Schema.define(version: 20160128004344) do
     t.string   "din"
     t.string   "name"
     t.string   "form"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
+ActiveRecord::Schema.define(version: 20160127184120) do
 
   create_table "users", force: :cascade do |t|
     t.string   "username"
