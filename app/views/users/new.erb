@@ -3,55 +3,91 @@
     <p> <%= message %> </p>
   <% end %>
 <% end %>
-<h1>Sign Up</h1>
 
-<form method="POST" action="/user/signup">
-  <div>
-    <label>Username<super>*</super>: </label>
-    <input type="text" name="username" value="<%=@user.username%>">
-  </div>
-  <div>
-    <label>Password<super>*</super>: </label>
-    <input type="password" name="password">
-  </div>
-  <div>
-    <label>Confirm Password<super>*</super>: </label>
-    <input type="password" name="password_confirmation">
-  </div>
-  <div>
-    <label>First Name<super>*</super>: </label>
-    <input type="text" name="first_name" value="<%=@user.first_name%>">
-  </div>
-  <div>
-    <label>Middle Name: </label>
-    <input type="text" name="middle_name" value="<%=@user.middle_name%>">
-  </div>
-  <div>
-    <label>Last Name<super>*</super>: </label>
-    <input type="text" name="last_name" value="<%=@user.last_name%>">
-  </div>
-  <div>
-    <label>Email<super>*</super>: </label>
-    <input type="email" name="email" value="<%=@user.email%>">
-  </div>
-  <div>
-    <label>Date of Birth: </label>
-    <input type="date" name="birth_date" value="<%=@user.birth_date%>">
-  </div>
-  <div>
-    <label>Date of Diagnosis: </label>
-    <input type="date" name="diagnosis_date" value="<%=@user.diagnosis_date%>">
-  </div>
-  <div>
-    <label>Height(cm): </label>
-    <input type="number" name="height" value="<%= @user.height %>">
-  </div>
-  <div>
-    <label>Medical History: </label>
-    <input type="text" name="medical_history" value="<%=@user.medical_history%>">
-  </div>
-  <div>
-    <input type="submit" value="submit">
-  </div>
-</form>
-<p><small><super>*</super> fields are mandatory</small></p>
+<div class = "container" style = "margin-top:10%">
+  <form class="form-horizontal" method="POST" action="/user/signup">
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-3 control-label"><super>*</super> fields are mandatory</label>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-2 control-label"><super>*</super>Username</label>
+      <div class="col-sm-10">
+        <input type="text" name="username" value="<%=@user.username%>" class="form-control" placeholder="Username">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label"><super>*</super>Email</label>
+      <div class="col-sm-10">
+        <input type="email" name="email" value="<%=@user.email%>" class="form-control" placeholder="Email">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label"><super>*</super>Password</label>
+      <div class="col-sm-10">
+        <input type="password" name="password" class="form-control" placeholder="Password">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label"><super>*</super>Confirm Password</label>
+      <div class="col-sm-10">
+        <input type="password" name="password_confirmation" class="form-control"  placeholder="Confirm Password">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">Date of Birth</label>
+      <div class="col-sm-10">
+        <input type="date" name="birth_date" value="<%=@user.birth_date%>" class="form-control"  placeholder="Date of Birth">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">Date of Diagnosis</label>
+      <div class="col-sm-10">
+        <input type="date" name="diagnosis_date" value="<%=@user.diagnosis_date%>" class="form-control"  placeholder="Date of Diagnosis">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label"><super>*</super>First Name</label>
+      <div class="col-sm-10">
+        <input type="text" name="first_name" value="<%=@user.first_name%>" class="form-control"  placeholder="First Name">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">Middle Name</label>
+      <div class="col-sm-10">
+        <input type="text" name="middle_name" value="<%=@user.middle_name%>" class="form-control"  placeholder="Middle Name">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label"><super>*</super>Last Name</label>
+      <div class="col-sm-10">
+        <input type="text" name="last_name" value="<%=@user.last_name%>" class="form-control"  placeholder="Last Name">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">Height(cm)</label>
+      <div class="col-sm-10">
+        <input type="number" name="height" value="<%= @user.height %>" class="form-control"  placeholder="Height">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">Medical History</label>
+      <div class="col-sm-10">
+        <input type="text" name="medical_history" value="<%=@user.medical_history%>" class="form-control"  placeholder="Medical History">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox"> Remember me
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default" value="submit">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>
