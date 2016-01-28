@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160128004344) do
+ActiveRecord::Schema.define(version: 20160128161314) do
 
   create_table "foods", force: :cascade do |t|
     t.float    "number"
@@ -46,6 +46,17 @@ ActiveRecord::Schema.define(version: 20160128004344) do
     t.string   "din"
     t.string   "name"
     t.string   "form"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "patient_foods", force: :cascade do |t|
+    t.integer  "users_id"
+    t.integer  "foods_id"
+    t.string   "name"
+    t.float    "measure"
+    t.text     "description"
+    t.datetime "meal_time"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
