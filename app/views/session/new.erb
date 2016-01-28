@@ -2,18 +2,33 @@
     <p> <%= @error %> </p>
 <% end %>
 
-<h1>Sign In</h1>
-
-<form method="POST" action="/user/signin">
-  <div>
-    <label>Username</label>
-    <input type="text" name="username">
-  </div>
-  <div>
-    <label>Password</label>
-    <input type="password" name="password">
-  </div>
-  <div>
-    <input type="submit" value="submit">
-  </div>
-</form>
+<div class="container" style = "margin-top:15%;width:500px" >
+  <form class="form-horizontal" method="POST" action="/user/signin">
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-2 control-label">Username</label>
+      <div class="col-sm-10">
+        <input type="text" name="username" class="form-control" placeholder="Username">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+      <div class="col-sm-10">
+        <input type="password" name="password" class="form-control" placeholder="Password">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox"> Remember me
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default">Sign in</button>
+      </div>
+    </div>
+  </form>
+</div>
