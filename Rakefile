@@ -26,3 +26,8 @@ desc 'Import food table'
 task "get_food" do
   require './db/import/import_food.rb'
 end
+
+desc 'Import food table'
+task "get_drugs" do
+  require './db/import/import_drugs.rb'
+end
