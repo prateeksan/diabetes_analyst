@@ -56,7 +56,8 @@ get '/user/:id' do
 end
 
 get '/user/:id/patient_medication/new' do
-
+  @user = current_user
+  erb :'/medication/patient_medication'
 end
 
 post '/user/:id/patient_medication' do
