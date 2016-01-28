@@ -1,8 +1,8 @@
 class CreatePatientFoodsTable < ActiveRecord::Migration
   def change
     create_table :patient_foods do |t|
-      t.references :users
-      t.references :foods
+      t.references :user
+      t.references :food
       t.string :name
       t.float :measure
       t.text :description

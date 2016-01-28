@@ -47,6 +47,14 @@ get '/user/:id' do
   erb :'/users/dashboard'
 end
 
+get '/user/:id/patient_medication/new' do
+
+end
+
+post '/user/:id/patient_medication' do
+
+end
+
 post '/user/signup' do
   @user = User.new(
     username: params[:username],
