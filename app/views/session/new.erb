@@ -1,8 +1,9 @@
-<% if @error %>
-    <p> <%= @error %> </p>
-<% end %>
-
-<div class="container" style = "margin-top:15%;width:500px" >
+ <div class="container" style = "margin-top:15%;width:500px" >
+  <% if @error %>
+    <div class="alert alert-warning fade in">
+      <p> Error: <%= @error %> </p>
+    </div>
+  <% end %>
   <form class="form-horizontal" method="POST" action="/user/signin">
     <div class="form-group">
       <label for="inputEmail3" class="col-sm-2 control-label">Username</label>
