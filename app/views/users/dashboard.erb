@@ -1,12 +1,15 @@
 <div class="btn-group-vertical" role="group" aria-label="..." style=";margin-left:2%;margin-top:10%;">
-  <a href="/user/<%=@user.id%>/patient_food/new" aria-label="Left Align" class="btn btn-default">
+  <a href="/user/<%=@user.id%>/patient_foods/new" aria-label="Left Align" class="btn btn-default">
   New Meal I ate
   </a>
-  <a href="/user/<%=@user.id%>/patient_medication/new" aria-label="Left Align" class="btn btn-default">
+  <a href="/user/<%=@user.id%>/patient_medications/new" aria-label="Left Align" class="btn btn-default">
   New Meds I took
   </a>  
-  <a href="/user/<%=@user.id%>/patient_measurement/new" aria-label="Left Align" class="btn btn-default">
+  <a href="/user/<%=@user.id%>/patient_measurements/new" aria-label="Left Align" class="btn btn-default">
   New Measurement
+  </a>
+  <a href="/user/<%=@user.id%>/edit" aria-label="Left Align" class="btn btn-default">
+  Update Profile
   </a>
 </div>
 
@@ -36,7 +39,7 @@
     24kg
     </div>
     <div class="col-md-3">
-    25.1
+    <%= @user.bmi_calculator %>
     </div>
   </div>
     <div class="row">

@@ -1,75 +1,46 @@
-
-<div class = "container" style = "margin-top:10%">
-  <form class="form-horizontal" method="POST" action="/user/<%=@user.id%>/patient_medication/new">
+<div class="container" style = "margin-top:15%;width:500px" >
+  <% if @patient_foods && @patient_foods.errors.any? %>
+    <div class="alert alert-warning fade in">
+      <% @patient_foods.errors.full_messages.each do |message| %>
+        <p><%= message %> </p>
+      <% end %>
+    </div>
+  <% end %>
+  <form class="form-horizontal" method="POST" action="/user/<%=@user.id%>/patient_measurements">
     <div class="form-group">
-      <label for="inputEmail3" class="col-sm-2 control-label"><super>*</super>Medication Name</label>
-      <div class="col-sm-10">
-        <input type="text" name="username" class="form-control" placeholder="Username">
+      <label class="col-sm-4 control-label">Blood Sugar Level</label>
+      <div class="col-sm-8">
+        <input type="integer" name="blood_sugar_level" class="form-control" placeholder="Blood Sugar Level(mmol/L)">
       </div>
     </div>
     <div class="form-group">
-      <label for="inputPassword3" class="col-sm-2 control-label"><super>*</super>Email</label>
-      <div class="col-sm-10">
-        <input type="email" name="email" class="form-control" placeholder="Email">
+      <label class="col-sm-4 control-label">Systolic Pressure</label>
+      <div class="col-sm-8">
+        <input type="integer" name="systolic_pressure" class="form-control" placeholder="Systolic Pressure(mm Hg)">
       </div>
     </div>
     <div class="form-group">
-      <label for="inputPassword3" class="col-sm-2 control-label"><super>*</super>Password</label>
-      <div class="col-sm-10">
-        <input type="password" name="password" class="form-control" placeholder="Password">
+      <label class="col-sm-4 control-label">Diastolic Pressure</label>
+      <div class="col-sm-8">
+        <input type="integer" name="diastolic_pressure" class="form-control"
+        placeholder="Diastolic Pressure(mm Hg)">
+      </div>
+    </div>    
+    <div class="form-group">
+      <label class="col-sm-4 control-label">Weight</label>
+      <div class="col-sm-8">
+        <input type="number" name="weight" class="form-control" placeholder="Weight(kg)">
       </div>
     </div>
     <div class="form-group">
-      <label for="inputPassword3" class="col-sm-2 control-label"><super>*</super>Confirm Password</label>
-      <div class="col-sm-10">
-        <input type="password" name="password_confirmation" class="form-control"  placeholder="Confirm Password">
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="inputPassword3" class="col-sm-2 control-label">Date of Birth</label>
-      <div class="col-sm-10">
-        <input type="date" name="birth_date" value="<%=@user.birth_date%>" class="form-control"  placeholder="Date of Birth">
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="inputPassword3" class="col-sm-2 control-label">Date of Diagnosis</label>
-      <div class="col-sm-10">
-        <input type="date" name="diagnosis_date" value="<%=@user.diagnosis_date%>" class="form-control"  placeholder="Date of Diagnosis">
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="inputPassword3" class="col-sm-2 control-label"><super>*</super>First Name</label>
-      <div class="col-sm-10">
-        <input type="text" name="first_name" value="<%=@user.first_name%>" class="form-control"  placeholder="First Name">
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="inputPassword3" class="col-sm-2 control-label">Middle Name</label>
-      <div class="col-sm-10">
-        <input type="text" name="middle_name" value="<%=@user.middle_name%>" class="form-control"  placeholder="Middle Name">
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="inputPassword3" class="col-sm-2 control-label"><super>*</super>Last Name</label>
-      <div class="col-sm-10">
-        <input type="text" name="last_name" value="<%=@user.last_name%>" class="form-control"  placeholder="Last Name">
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="inputPassword3" class="col-sm-2 control-label">Height(cm)</label>
-      <div class="col-sm-10">
-        <input type="number" name="height" value="<%= @user.height %>" class="form-control"  placeholder="Height">
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="inputPassword3" class="col-sm-2 control-label">Medical History</label>
-      <div class="col-sm-10">
-        <input type="text" name="medical_history" value="<%=@user.medical_history%>" class="form-control"  placeholder="Medical History">
+      <label class="col-sm-4 control-label">Time</label>
+      <div class="col-sm-8">
+        <input type="time" name="measurement_time" class="form-control" placeholder="Measurement Time">
       </div>
     </div>
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-default" value="submit">Submit</button>
+        <button type="submit" class="btn btn-default">Submit</button>
       </div>
     </div>
   </form>

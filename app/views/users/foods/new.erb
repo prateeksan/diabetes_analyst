@@ -6,7 +6,7 @@
       <% end %>
     </div>
   <% end %>
-  <form class="form-horizontal" method="POST" action="/user/#{session[:user_id]}/foods">
+  <form class="form-horizontal" method="POST" action="/user/<%=session[:user_id]%>/foods">
     <div class="form-group">
       <label class="col-sm-2 control-label">Food</label>
       <div class="col-sm-10">
