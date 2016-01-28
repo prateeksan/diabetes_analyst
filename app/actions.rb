@@ -31,7 +31,7 @@ post '/user/signin' do
     if @user.authenticate(params[:password])
       session[:user_id] = @user.id
       #currently set to redirect to landing page. In future we can redirect to wherever the functionality is 
-      redirect '/'
+      redirect "/user/#{@user.id}"
     else
       @error = "Incorrect pasword, try again"
       erb :'/session/new'
@@ -40,6 +40,11 @@ post '/user/signin' do
     @error = "User not found, try again"
     erb :'/session/new'
   end
+end
+
+get '/user/:id' do
+  @user = current_user
+  erb :'/users/dashboard'
 end
 
 post '/user/signup' do
