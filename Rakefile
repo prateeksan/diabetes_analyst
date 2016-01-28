@@ -1,4 +1,5 @@
 require 'rake'
+require 'csv'
 require "sinatra/activerecord/rake"
 require ::File.expand_path('../config/environment', __FILE__)
 
@@ -19,4 +20,14 @@ end
 desc 'Retrieves the current schema version number'
 task "db:version" do
   puts "Current version: #{ActiveRecord::Migrator.current_version}"
+end
+
+desc 'Import food table'
+task "get_food" do
+  require './db/import/import_food.rb'
+end
+
+desc 'Import food table'
+task "get_drugs" do
+  require './db/import/import_drugs.rb'
 end
