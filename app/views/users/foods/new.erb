@@ -6,11 +6,11 @@
       <% end %>
     </div>
   <% end %>
-  <form class="form-horizontal" method="POST" action="/user/#{session[:user_id]}/foods">
+  <form class="form-horizontal" method="POST" action="/user/<%=session[:user_id]%>/foods">
     <div class="form-group">
-      <label class="col-sm-2 control-label">Food</label>
+      <label class="col-sm-2 control-label" for="food_name">Food</label>
       <div class="col-sm-10">
-        <input type="text" name="name" class="form-control" placeholder="foodname">
+        <input id="food_name" name="name" class="form-control" placeholder="foodname">
       </div>
     </div>
     <div class="form-group">
@@ -38,3 +38,4 @@
     </div>
   </form>
 </div>
+<script type="text/javascript" src="/javascript/autocomplete.js"></script>
