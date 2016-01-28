@@ -24,6 +24,14 @@ get '/user/signout' do
   redirect '/'
 end
 
+get '/user/foods/new' do
+  if current_user 
+    erb :'/users/foods/new'
+  else
+    redirect '/user/signin'
+  end
+end
+
 post '/user/signin' do 
   @user = User.find_by(username: params[:username])
 
@@ -33,11 +41,11 @@ post '/user/signin' do
       #currently set to redirect to landing page. In future we can redirect to wherever the functionality is 
       redirect '/'
     else
-      @error = "Incorrect pasword, try again"
+      @error = "incorrect pasword, try again"
       erb :'/session/new'
     end      
   else
-    @error = "User not found, try again"
+    @error = "username not found, try again"
     erb :'/session/new'
   end
 end

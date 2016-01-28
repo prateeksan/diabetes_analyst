@@ -1,10 +1,14 @@
-<% if @user.errors.any? %>
-  <% @user.errors.full_messages.each do |message| %>
-    <p> <%= message %> </p>
-  <% end %>
-<% end %>
-
 <div class = "container" style = "margin-top:10%">
+  <% if @user.errors.any? %>
+    <div class="alert alert-warning fade in">
+      <ul>
+        <p>Sign-up failed due to the following error(s):</p>
+        <% @user.errors.full_messages.each do |message| %>
+          <li> <%= message %> </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <form class="form-horizontal" method="POST" action="/user/signup">
     <div class="form-group">
       <label for="inputEmail3" class="col-sm-3 control-label"><super>*</super> fields are mandatory</label>
