@@ -11,6 +11,9 @@ gem 'sinatra-activerecord'
 gem 'puma'
 gem 'tux'
 
+#password encryption purposes
+gem 'bcrypt'
+
 group :development, :test do
   gem 'pry'
   gem 'shotgun'
