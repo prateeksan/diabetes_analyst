@@ -11,7 +11,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160127184120) do
+ActiveRecord::Schema.define(version: 20160128004344) do
+
+  create_table "foods", force: :cascade do |t|
+    t.float    "number"
+    t.string   "name"
+    t.string   "measure"
+    t.float    "weight"
+    t.float    "kcal"
+    t.float    "kj"
+    t.float    "protein"
+    t.float    "carbohydrate"
+    t.float    "total_sugar"
+    t.float    "total_dietary_fibre"
+    t.float    "total_fat"
+    t.float    "calcium"
+    t.float    "iron"
+    t.float    "sodium"
+    t.float    "potassium"
+    t.float    "magnesium"
+    t.float    "phosphorus"
+    t.float    "vitamin_a"
+    t.float    "beta_carotene"
+    t.float    "lycopene"
+    t.float    "folate"
+    t.float    "vitamin_c"
+    t.float    "vitamin_b12"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "medications", force: :cascade do |t|
+    t.string   "any"
+    t.string   "din"
+    t.string   "name"
+    t.string   "form"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "username"
