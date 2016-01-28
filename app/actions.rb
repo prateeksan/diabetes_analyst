@@ -24,6 +24,14 @@ get '/user/signout' do
   redirect '/'
 end
 
+get '/user/foods/new' do
+  if current_user 
+    erb :'/users/foods/new'
+  else
+    redirect '/user/signin'
+  end
+end
+
 post '/user/signin' do 
   @user = User.find_by(username: params[:username])
 
