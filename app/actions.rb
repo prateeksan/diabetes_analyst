@@ -63,3 +63,7 @@ post '/user/signup' do
     erb :'/users/new'
   end
 end
+
+get '/aboutus' do
+  erb :"about"
+end
