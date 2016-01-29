@@ -64,6 +64,7 @@ post '/user/signin' do
     @error = "username not found, try again"
     erb :'/session/new'
   end
+
 end
 
 post '/user/signup' do
@@ -85,6 +86,28 @@ post '/user/signup' do
     redirect '/'
   else
     erb :'/users/new'
+  end
+end
+
+post "/user/:id/foods" do
+  @food = Food.find_by(name: params[:name])
+  if @food
+    @patient_food = PatientFood.new(
+      name: @food.name,
+      user_id: current_user.id,
+      food_id: @food.id,
+      measure: params[:measure],
+      meal_time: params[:meal_time],
+      description: params[:description] 
+      )
+    if @patient_food.save
+      redirect '/'
+    else
+      erb :'users/foods/new'
+    end
+  else
+    @error = "This food item is not in our database :("
+    erb :'users/foods/new'
   end
 end
 
