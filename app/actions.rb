@@ -159,3 +159,11 @@ end
 get '/aboutus' do
   erb :"about"
 end
+
+get '/user/measurements/graphs' do
+  @user = current_user
+  @sugar_values = @user.extracting_blood_sugar
+  # @sugar_values
+  erb :'/measurements/graphs'  
+
+end
