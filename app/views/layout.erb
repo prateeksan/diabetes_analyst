@@ -68,10 +68,19 @@
                     <a href="/aboutus">About</a>
                 </li>
                 <li class="page-scroll">
+                  <% unless current_user %>
                     <a href="/user/signin">Sign in</a>
+                    <% end %>
                 </li>
                 <li class="page-scroll">
+                  <% unless current_user %>
                     <a href="/user/signup">Sign up</a>
+                  <% end %>
+                </li>
+                <li class="page-scroll">
+                  <% if current_user %>
+                    <a href="/user/signout">Sign Out</a>
+                  <% end %>
                 </li>
             </ul>
         </div>
@@ -81,7 +90,7 @@
 </nav>
 ​
   <%= yield %>
-​
+
     <!-- Plugin JavaScript -->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
     <script src="/javascript/classie.js"></script>

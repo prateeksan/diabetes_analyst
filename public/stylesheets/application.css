@@ -1,0 +1,18 @@
+.ui-autocomplete {
+  background-color: white;
+  width: 300px;
+  border-style: groove;
+  border-radius: 2%;
+  list-style-type: none;
+  padding: 5px 10px;
+}
+.ui-menu-item:hover {
+  background-color: #04A0E2;
+  color: #F2F2F2;
+  padding: 2px;
+  border-radius: 3%;
+}
+
+.ui-helper-hidden-accessible {
+  display: none;
+}

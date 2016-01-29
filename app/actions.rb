@@ -14,11 +14,13 @@ get '/' do
 end
 
 get '/user/signup' do
+  redirect "/user/#{current_user.id}" if current_user
   @user = User.new
   erb :'/users/new'
 end
 
 get '/user/signin' do
+  redirect "/user/#{current_user.id}" if current_user
   @error = nil
   erb :'/session/new'
 end
@@ -26,14 +28,6 @@ end
 get '/user/signout' do
   session[:user_id] = nil
   redirect '/'
-end
-
-get '/user/foods/new' do
-  if current_user 
-    erb :'/users/foods/new'
-  else
-    redirect '/user/signin'
-  end
 end
 
 get "/autocomplete_food_name" do
@@ -87,6 +81,14 @@ get '/user/:id' do
   end
 end
 
+get '/user/:id/foods/new' do
+  if current_user.id == params[:id].to_i
+    erb :'/users/foods/new'
+  else
+    redirect '/user/signin'
+  end
+end
+
 get '/user/:id/edit' do
   @user = current_user
   erb :'/users/edit'
@@ -111,21 +113,21 @@ post '/user/:id/edit' do
   end
 end
 
-get '/user/:id/patient_medications/new' do
+get '/user/:id/meds/new' do
   @user = current_user
   erb :'/medication/patient_medication'
 end
 
-post '/user/:id/patient_medications' do
+post '/user/:id/meds' do
 
 end
 
-get '/user/:id/patient_measurements/new' do
+get '/user/:id/measurements/new' do
   @user = current_user
   erb :'/measurement/patient_measurement'
 end
 
-post '/user/:id/patient_measurements' do
+post '/user/:id/measurements' do
   params[:measurement_time] = add_date_to_time(params[:measurement_time])
   @patient_measurement = PatientMeasurement.new(
     blood_sugar_level: params[:blood_sugar_level],

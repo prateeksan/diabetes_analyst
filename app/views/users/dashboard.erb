@@ -1,11 +1,11 @@
 <div class="btn-group-vertical" role="group" aria-label="..." style=";margin-left:2%;margin-top:10%;">
-  <a href="/user/<%=@user.id%>/patient_foods/new" aria-label="Left Align" class="btn btn-default">
+  <a href="/user/<%= @user.id %>/foods/new" aria-label="Left Align" class="btn btn-default">
   New Meal I ate
   </a>
-  <a href="/user/<%=@user.id%>/patient_medications/new" aria-label="Left Align" class="btn btn-default">
+  <a href="/user/<%=@user.id%>/meds/new" aria-label="Left Align" class="btn btn-default">
   New Meds I took
   </a>  
-  <a href="/user/<%=@user.id%>/patient_measurements/new" aria-label="Left Align" class="btn btn-default">
+  <a href="/user/<%=@user.id%>/measurements/new" aria-label="Left Align" class="btn btn-default">
   New Measurement
   </a>
   <a href="/user/<%=@user.id%>/edit" aria-label="Left Align" class="btn btn-default">
@@ -39,7 +39,6 @@
     24kg
     </div>
     <div class="col-md-3">
-    <%= @user.bmi_calculator %>
     </div>
   </div>
     <div class="row">
@@ -67,24 +66,7 @@
     12
     </div>
     <div class="col-md-3">
-    
-View Standard Measurements Metric Measurements
-  
-Your Height:  
-  (centimeters)
- 
- Your Weight: 
-  (kilograms)
- Compute BMI
-Your BMI:
 
- 
- 
-BMI Categories: 
-Underweight = <18.5
-Normal weight = 18.5–24.9 
-Overweight = 25–29.9 
-Obesity = BMI of 30 or greater
     </div>
   </div>
 </div>
