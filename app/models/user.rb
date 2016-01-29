@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   
 
 
-  def test_with_json
+  def extracting_blood_sugar
     pairs = []
     PatientMeasurement.all.each do |measurement|
       pairs << [measurement.measurement_time, measurement.blood_sugar_level]
@@ -23,5 +23,9 @@ class User < ActiveRecord::Base
     result.to_json
   end
 
+
+  def bmi_calculator
+    (self.patient_measurements.last.weight.to_f / self.height.to_f / self.height.to_f * 10000).floor
+  end
 
 end

@@ -89,6 +89,3 @@ DEPENDENCIES
   sinatra-contrib
   sqlite3
   tux
-
-BUNDLED WITH
-   1.11.2
