@@ -75,9 +75,8 @@ post '/user/signin' do
 end
 
 get '/user/:id' do
-  @user = current_user
-  @user_bmi = bmi_calculator(@user)
-  if @user
+  if @user = current_user
+    @user_bmi = bmi_calculator(@user)
     erb :'/users/dashboard'
   else
     redirect '/user/signin'
