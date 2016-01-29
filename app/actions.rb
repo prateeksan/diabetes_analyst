@@ -36,6 +36,22 @@ get '/user/foods/new' do
   end
 end
 
+get "/autocomplete_food_name" do
+  result =[]
+  pattern = params["term"].downcase
+  if pattern.length >= 2
+    content_type :json
+    matches = Food.where("lower(name) LIKE '#{pattern}%'")
+    matches.each do |match|
+      result << match[:name]
+    end
+  end
+  result.to_json
+  # content_type :json
+  # [params["term"]].to_json
+end
+
+
 post '/user/signin' do 
   @user = User.find_by(username: params[:username])
 
