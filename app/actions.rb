@@ -10,6 +10,11 @@ helpers do
   def bmi_calculator(user)
     (user.patient_measurements.last.weight.to_f / user.height.to_f / user.height.to_f * 10000).floor
   end
+    
+  def filter_n_day(n,arr)
+    arr.where(created_at: (n.day.ago)..((n-1).day.ago))
+  end
+  
 end
 
 # Homepage (Root path)
@@ -38,6 +43,18 @@ get '/user/foods/new' do
   else
     redirect '/user/signin'
   end
+end
+
+get '/user/:id/patient_measurements/view' do
+  @user = current_user
+  @measurements_arr = @user.patient_measurements.order("created_at DESC")
+  erb :'/measurement/view_patient_measurement'
+end
+
+get '/user/:id/patient_measurements/:mea_id/update' do
+  @user = current_user
+  @measurement = @user.patient_measurements.find(params[:mea_id])
+  erb :'/measurement/update_patient_measurement'
 end
 
 get "/autocomplete_food_name" do
