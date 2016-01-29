@@ -6,6 +6,10 @@ helpers do
   def add_date_to_time(time)
     Date.today.to_s + " " + time   
   end
+
+  def bmi_calculator(user)
+    (user.patient_measurements.last.weight.to_f / user.height.to_f / user.height.to_f * 10000).floor
+  end
 end
 
 # Homepage (Root path)
@@ -72,6 +76,7 @@ end
 
 get '/user/:id' do
   @user = current_user
+  @user_bmi = bmi_calculator(@user)
   if @user
     erb :'/users/dashboard'
   else

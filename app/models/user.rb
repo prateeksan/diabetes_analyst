@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   
   has_secure_password
   has_many :patient_measurements
+  has_many :patient_foods
+  has_many :patient_medications
 
   validates :username, :first_name, :last_name, :email, presence: true
 
@@ -19,8 +21,6 @@ data << values
   end
 
 
-  def bmi_calculator
-    (self.patient_measurements.last.weight.to_f / self.height.to_f / self.height.to_f * 10000).floor
-  end
+  
 
 end
