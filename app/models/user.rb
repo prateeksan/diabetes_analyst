@@ -7,17 +7,21 @@ class User < ActiveRecord::Base
 
 
 
-  def extract_blood_sugar
-    PatientMeasurement.all.each do |measurement|
-  dates << measurement.measurement_time.mday
-  values << measurement.blood_sugar_level
-end
-data = []
-data << dates
-data << values
-    
-  end
+  
 
+
+  def test_with_json
+    pairs = []
+    PatientMeasurement.all.each do |measurement|
+      pairs << [measurement.measurement_time, measurement.blood_sugar_level]
+    end
+    # sorted_pairs = pairs.sort_by {|result| result[0]}
+    # first_day = sorted_pairs.first[0].yday
+    # result = sorted_pairs.map {|pair| [(pair[0].yday - first_day) + 1,pair[1]]}
+    result = pairs.map { |pair| [pair[0].to_date.strftime("%b-%d"),pair[1]]}
+    result.unshift ["Date","Sugar level"]
+    result.to_json
+  end
 
 
 end

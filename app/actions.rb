@@ -75,3 +75,11 @@ end
 get '/aboutus' do
   erb :"about"
 end
+
+get '/user/measurements/graphs' do
+  @user = current_user
+  @sugar_values = @user.test_with_json
+  # @sugar_values
+  erb :'/measurements/graphs'  
+
+end
