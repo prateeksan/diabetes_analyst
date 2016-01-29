@@ -68,6 +68,11 @@
                     <a href="/aboutus">About</a>
                 </li>
                 <li class="page-scroll">
+                  <% if current_user %>
+                    <a href="/user/<%= current_user.id %>">Dashboard</a>
+                  <% end %>
+                </li>
+                <li class="page-scroll">
                   <% unless current_user %>
                     <a href="/user/signin">Sign in</a>
                     <% end %>
