@@ -28,9 +28,10 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 ​
   <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-  <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css"
-​
-  <!-- Latest compiled and minified JavaScript -->
+  
+  <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+<!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
 <!-- Test with chart -->
@@ -67,10 +68,24 @@
                     <a href="/aboutus">About</a>
                 </li>
                 <li class="page-scroll">
-                    <a href="/user/signin">Sign in</a>
+                  <% if current_user %>
+                    <a href="/user/<%= current_user.id %>">Dashboard</a>
+                  <% end %>
                 </li>
                 <li class="page-scroll">
+                  <% unless current_user %>
+                    <a href="/user/signin">Sign in</a>
+                    <% end %>
+                </li>
+                <li class="page-scroll">
+                  <% unless current_user %>
                     <a href="/user/signup">Sign up</a>
+                  <% end %>
+                </li>
+                <li class="page-scroll">
+                  <% if current_user %>
+                    <a href="/user/signout">Sign Out</a>
+                  <% end %>
                 </li>
             </ul>
         </div>
@@ -80,7 +95,7 @@
 </nav>
 ​
   <%= yield %>
-​
+
     <!-- Plugin JavaScript -->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
     <script src="/javascript/classie.js"></script>

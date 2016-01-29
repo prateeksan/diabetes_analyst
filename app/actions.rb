@@ -14,11 +14,13 @@ get '/' do
 end
 
 get '/user/signup' do
+  redirect "/user/#{current_user.id}" if current_user
   @user = User.new
   erb :'/users/new'
 end
 
 get '/user/signin' do
+  redirect "/user/#{current_user.id}" if current_user
   @error = nil
   erb :'/session/new'
 end
@@ -26,14 +28,6 @@ end
 get '/user/signout' do
   session[:user_id] = nil
   redirect '/'
-end
-
-get '/user/foods/new' do
-  if current_user 
-    erb :'/users/foods/new'
-  else
-    redirect '/user/signin'
-  end
 end
 
 get "/autocomplete_food_name" do
@@ -51,6 +45,13 @@ get "/autocomplete_food_name" do
   # [params["term"]].to_json
 end
 
+get "/fooditem" do
+  food_name = params[:food_name]
+  item = Food.find_by(name: "#{food_name}")
+  item_name = item.measure
+  content_type :json
+  "#{item_name}".to_json
+end
 
 post '/user/signin' do 
   @user = User.find_by(username: params[:username])
@@ -68,12 +69,21 @@ post '/user/signin' do
     @error = "username not found, try again"
     erb :'/session/new'
   end
+
 end
 
 get '/user/:id' do
   @user = current_user
   if @user
     erb :'/users/dashboard'
+  else
+    redirect '/user/signin'
+  end
+end
+
+get '/user/:id/foods/new' do
+  if current_user.id == params[:id].to_i
+    erb :'/users/foods/new'
   else
     redirect '/user/signin'
   end
@@ -103,21 +113,21 @@ post '/user/:id/edit' do
   end
 end
 
-get '/user/:id/patient_medications/new' do
+get '/user/:id/meds/new' do
   @user = current_user
   erb :'/medication/patient_medication'
 end
 
-post '/user/:id/patient_medications' do
+post '/user/:id/meds' do
 
 end
 
-get '/user/:id/patient_measurements/new' do
+get '/user/:id/measurements/new' do
   @user = current_user
   erb :'/measurement/patient_measurement'
 end
 
-post '/user/:id/patient_measurements' do
+post '/user/:id/measurements' do
   params[:measurement_time] = add_date_to_time(params[:measurement_time])
   @patient_measurement = PatientMeasurement.new(
     blood_sugar_level: params[:blood_sugar_level],
@@ -153,6 +163,28 @@ post '/user/signup' do
     redirect '/'
   else
     erb :'/users/new'
+  end
+end
+
+post "/user/:id/foods" do
+  @food = Food.find_by(name: params[:name])
+  if @food
+    @patient_food = PatientFood.new(
+      name: @food.name,
+      user_id: current_user.id,
+      food_id: @food.id,
+      measure: params[:measure],
+      meal_time: params[:meal_time],
+      description: params[:description] 
+      )
+    if @patient_food.save
+      redirect '/'
+    else
+      erb :'users/foods/new'
+    end
+  else
+    @error = "This food item is not in our database :("
+    erb :'users/foods/new'
   end
 end
 
