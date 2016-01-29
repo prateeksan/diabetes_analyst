@@ -1,93 +1,65 @@
 
-
 <div class="row">
   <div style="text-align:center;width:25%;margin-left:38%;margin-top:10%">
     <h1><p class="text-primary">Daily Report</p></h1>
-  </div>
-</div>
 
-<div class="row"> 
-  <div class="col-md-3" style="border:2px solid black">
-    <div class="btn-group-vertical" role="group" aria-label="...">
-      <a href="/user/<%=@user.id%>/patient_foods/new" aria-label="Left Align" class="btn btn-default">
-        New Meal I ate
-      </a>
-      <a href="/user/<%=@user.id%>/patient_medications/new" aria-label="Left Align" class="btn btn-default">
-        New Meds I took
-      </a>  
-      <a href="/user/<%=@user.id%>/patient_measurements/new" aria-label="Left Align" class="btn btn-default">
-        New Measurement
-      </a>
-      <a href="/user/<%=@user.id%>/edit" aria-label="Left Align" class="btn btn-default">
-        Update Profile
-      </a>
-      <a href="/user/<%=@user.id%>/foods/view" aria-label="Left Align" class="btn btn-default">
+<div class="btn-group-vertical" role="group" aria-label="..." style=";margin-left:2%;margin-top:10%;">
+  <a href="/user/<%= @user.id %>/foods/new" aria-label="Left Align" class="btn btn-default">
+  New Meal I ate
+  </a>
+  <a href="/user/<%=@user.id%>/meds/new " aria-label="Left Align" class="btn btn-default">
+  New Meds I took
+  </a>  
+  <a href="/user/<%=@user.id%>/measurements/new" aria-label="Left Align" class="btn btn-default">
+  New Measurement
+  </a>
+  <a href="/user/<%=@user.id%>/edit" aria-label="Left Align" class="btn btn-default">
+  Update Profile
+  </a>
+   <a href="/user/<%=@user.id%>/foods/view" aria-label="Left Align" class="btn btn-default">
         View Recent Meals
-      </a>
-       <a href="/user/<%=@user.id%>/patient_medications/view" aria-label="Left Align" class="btn btn-default">
+    </a>
+      <a href="/user/<%=@user.id%>/meds/view" aria-label="Left Align" class="btn btn-default">
         View Recent Mecations
       </a>
-       <a href="/user/<%=@user.id%>/patient_measurements/view" aria-label="Left Align" class="btn btn-default">
+       <a href="/user/<%=@user.id%>/measurements/view" aria-label="Left Align" class="btn btn-default">
        View Recent Measurements
       </a>
+</div>
+
+<div class="container" style="border:2px solid black;width:70%;margin-left:200px;margin-top:-100px">
+  <div class="row">
+    <div class="col-md-3">
+    Total calorie intake:
+    </div>
+    <div class="col-md-3">
+    Total protein intake:
+    </div>
+    <div class="col-md-3">
+    Total fat intake:
+    </div>
+    <div class="col-md-3">
+    Current BMI:
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+    2041 
+    </div>
+    <div class="col-md-3">
+    12mg  
+    </div>
+    <div class="col-md-3">
+    24kg
+    </div>
+    <div class="col-md-3">
+    </div>
+
+     
     </div>
   </div>
 
-  <div class="col-md-9">
-    <div class="container" style="width:70%;border:2px solid black">
-      <div class="row">
-        <div class="col-md-3">
-        Today's calorie intake:
-        </div>
-        <div class="col-md-3">
-        Today's protein intake:
-        </div>
-        <div class="col-md-3">
-        Today's fat intake:
-        </div>
-        <div class="col-md-3">
-        Current BMI:
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-3">  
-        <% food_id_arr = @user.patient_foods.where("meal_time >= ?", Time.new(Time.now.year,Time.now.month,Time.now.day,0,0,0)).map{|meal|meal.food_id} %>
-        <%=c_kcal=food_id_arr.reduce(0){|memo,food_id|memo += Food.find(food_id).kcal}%> Kcal
-        </div>
-        <div class="col-md-3">
-        <%=c_p=food_id_arr.reduce(0){|memo,food_id|memo += Food.find(food_id).protein}%> g
-        </div>
-        <div class="col-md-3">
-        <%=c_f=food_id_arr.reduce(0){|memo,food_id|memo += Food.find(food_id).total_fat}%> g
-        </div>
-        <div class="col-md-3">
-        <%= @user_bmi %>
-        </div>
-      </div>
 
-        <div class="row">
-          <div class="col-md-3">
-            <div class="progress">
-              <div class="progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:<%=(c_kcal / 20)%>%;">
-                <h8 style="color:blue;"><%= (c_kcal / 20).round(2)%>%</h8>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="progress">
-              <div class="progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:<%=(c_p / 0.5)%>%;">
-                <h8 style="color:blue;"><%= (c_p / 0.5).round(2)%>%</h8>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="progress">
-              <div class="progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:<%=(c_f / 0.24)%>%;">
-                <h8 style="color:blue;"><%= (c_f / 0.24).round(2)%>%</h8>
-              </div>
-            </div>
-          </div>
-        </div>
 
         <div class="row">
           <div class="col-md-3">
@@ -116,7 +88,6 @@
           <div class="col-md-3">
           </div>
         </div>
-        
     </div>
   </div>
 </div>
