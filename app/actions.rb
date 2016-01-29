@@ -51,6 +51,13 @@ get "/autocomplete_food_name" do
   # [params["term"]].to_json
 end
 
+get "/fooditem" do
+  food_name = params[:food_name]
+  item = Food.find_by(name: "#{food_name}")
+  item_name = item.measure
+  content_type :json
+  "#{item_name}".to_json
+end
 
 post '/user/signin' do 
   @user = User.find_by(username: params[:username])

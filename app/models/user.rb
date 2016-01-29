@@ -1,14 +1,10 @@
 class User < ActiveRecord::Base
   
   has_secure_password
-  has_many :patient_measurements, :patient_foods
+  has_many :patient_measurements 
+  has_many :patient_foods
 
   validates :username, :first_name, :last_name, :email, presence: true
-
-
-
-  
-
 
   def extracting_blood_sugar
     pairs = []
