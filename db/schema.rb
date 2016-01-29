@@ -72,6 +72,16 @@ ActiveRecord::Schema.define(version: 20160128192029) do
     t.datetime "updated_at"
   end
 
+  create_table "patient_medications", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "medication_id"
+    t.string   "name"
+    t.float    "quantity"
+    t.datetime "medication_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "username"
     t.string   "password_digest"

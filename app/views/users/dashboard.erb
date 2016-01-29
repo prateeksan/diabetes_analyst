@@ -1,0 +1,90 @@
+<div class="btn-group-vertical" role="group" aria-label="..." style=";margin-left:2%;margin-top:10%;">
+  <a href="/user/<%=@user.id%>/patient_foods/new" aria-label="Left Align" class="btn btn-default">
+  New Meal I ate
+  </a>
+  <a href="/user/<%=@user.id%>/patient_medications/new" aria-label="Left Align" class="btn btn-default">
+  New Meds I took
+  </a>  
+  <a href="/user/<%=@user.id%>/patient_measurements/new" aria-label="Left Align" class="btn btn-default">
+  New Measurement
+  </a>
+  <a href="/user/<%=@user.id%>/edit" aria-label="Left Align" class="btn btn-default">
+  Update Profile
+  </a>
+</div>
+
+<div class="container" style="border:2px solid black;width:70%;margin-left:200px;margin-top:-100px">
+  <div class="row">
+    <div class="col-md-3">
+    Total calorie intake:
+    </div>
+    <div class="col-md-3">
+    Total protein intake:
+    </div>
+    <div class="col-md-3">
+    Total fat intake:
+    </div>
+    <div class="col-md-3">
+    Current BMI:
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+    2041 
+    </div>
+    <div class="col-md-3">
+    12mg  
+    </div>
+    <div class="col-md-3">
+    24kg
+    </div>
+    <div class="col-md-3">
+    <%= @user.bmi_calculator %>
+    </div>
+  </div>
+    <div class="row">
+    <div class="col-md-3">
+    Average calorie/day:
+    </div>
+    <div class="col-md-3">
+    Average protein/day:
+    </div>
+    <div class="col-md-3">
+    Average fat/day:
+    </div>
+    <div class="col-md-3">
+    
+    </div>
+  </div>
+    <div class="row">
+    <div class="col-md-3">
+    12
+    </div>
+    <div class="col-md-3">
+    23
+    </div>
+    <div class="col-md-3">
+    12
+    </div>
+    <div class="col-md-3">
+    
+View Standard Measurements Metric Measurements
+  
+Your Height:  
+  (centimeters)
+ 
+ Your Weight: 
+  (kilograms)
+ Compute BMI
+Your BMI:
+
+ 
+ 
+BMI Categories: 
+Underweight = <18.5
+Normal weight = 18.5–24.9 
+Overweight = 25–29.9 
+Obesity = BMI of 30 or greater
+    </div>
+  </div>
+</div>
