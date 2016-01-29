@@ -160,10 +160,16 @@ get '/aboutus' do
   erb :"about"
 end
 
-get '/user/measurements/graphs' do
-  @user = current_user
-  @sugar_values = @user.extracting_blood_sugar
-  # @sugar_values
-  erb :'/measurements/graphs'  
 
+###Experimental stuff
+get '/user/measurements/graphs' do
+  @user = User.first
+  @sugar_values = @user.extracting_measurements_for_graph("sugar_level")
+  @pressure_values = @user.extracting_measurements_for_graph("pressure")
+  @weight_values = @user.extracting_measurements_for_graph("weight")
+  #@sugar_values #= @sugar_values.to_json
+  # @label = @sugar_values[0]
+  # @data = @sugar_values[1].to_json
+   #binding.pry
+  erb :'/measurements/graphs' 
 end

@@ -1,25 +1,59 @@
+    <script>
+    var sugarChartData = {
+      labels : <%=@sugar_values[0].to_json%>,
+      datasets : [
+        {
+          label: "Blood sugar level",
+          fillColor : "rgba(220,220,220,0.2)",
+          strokeColor : "rgba(220,220,220,1)",
+          pointColor : "rgba(220,220,220,1)",
+          pointStrokeColor : "#fff",
+          pointHighlightFill : "#fff",
+          pointHighlightStroke : "rgba(220,220,220,1)",
+          data : <%=@sugar_values[1].to_json%> 
+        }
+      ]
+    }
 
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable(<%=@sugar_values%>);
-
-        var options = {
-          title: 'Blood sugar levels',
-          //curveType: 'function',
-          legend: { position: 'bottom' }
-        };
-
-        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-
-        chart.draw(data, options);
-      }
-    </script>
+    var weightChartData = {
+      labels : <%=@weight_values[0].to_json%>,
+      datasets : [
+        {
+          label: "My First dataset",
+          fillColor : "rgba(220,220,220,0.2)",
+          strokeColor : "rgba(220,220,220,1)",
+          pointColor : "rgba(220,220,220,1)",
+          pointStrokeColor : "#fff",
+          pointHighlightFill : "#fff",
+          pointHighlightStroke : "rgba(220,220,220,1)",
+          data : <%=@weight_values[1].to_json%> 
+        }
+      ]
+    }
 
 
+  window.onload = function(){
+    var ctx0 = document.getElementById("blood_sugar").getContext("2d");
+    window.myLine = new Chart(ctx0).Line(sugarChartData, {
+      responsive: true
+    });
 
-    <div id="curve_chart" style="width: 900px; height: 500px; margin-top:10%"></div>
-  
+    var ctx1= document.getElementById("weight").getContext("2d");
+    window.myLine = new Chart(ctx1).Line(weightChartData, {
+      responsive: true
+    });
+  }
+  </script>
 
+
+   <div style="width: 50% margin-top:10%">
+      <canvas id="weight" height="450" width="600"></canvas>
+    </div>
+
+
+ <div style="width: 50% margin-top:50%">
+      <canvas id="blood_sugar" height="450" width="600"></canvas>
+    </div>
+
+
+   
