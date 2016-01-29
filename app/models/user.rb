@@ -1,11 +1,10 @@
 class User < ActiveRecord::Base
   
   has_secure_password
-  has_many :patient_measurements
+  has_many :patient_measurements 
+  has_many :patient_foods
 
   validates :username, :first_name, :last_name, :email, presence: true
-
-
 
   
   def extracting_measurements_for_graph(measurement)
@@ -57,7 +56,6 @@ class User < ActiveRecord::Base
     result      
   end
   
-
 
   # def bmi_calculator
   #   (self.patient_measurements.last.weight.to_f / self.height.to_f / self.height.to_f * 10000).floor
