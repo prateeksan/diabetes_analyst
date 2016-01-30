@@ -174,6 +174,7 @@ end
 
 post "/user/:id/foods" do
   @food = Food.find_by(name: params[:name])
+  @meal = "#{params["meal"]}"
   if @food
     @patient_food = PatientFood.new(
       name: @food.name,
@@ -183,13 +184,12 @@ post "/user/:id/foods" do
       meal_time: params[:meal_time],
       description: params[:description] 
       )
-    
     if @patient_food.save
       if params["submit_food"]
         @meal = nil
         redirect "/user/#{current_user.id}"
       elsif params["add_food"]
-        @meal = params["meal"] + "_#{@patient_food.name}_"
+        @meal += "_#{@patient_food.name}_"
         @present_date_time = params[:meal_time]
         erb :'users/foods/new'
       end
