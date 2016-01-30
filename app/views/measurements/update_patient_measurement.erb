@@ -3,31 +3,31 @@
     <div class="form-group">
       <label  class="col-sm-2 control-label">Blood Sugar Level</label>
       <div class="col-sm-10">
-        <input type="number" name="blood_sugar_level" value="<%=@measurement.blood_sugar_level%>" class="form-control">
+        <input type="number" name="blood_sugar_level" value="<%=@measurement.blood_sugar_level%>" class="form-control" placeholder="Blood Sugar Level(mmol/L)">
       </div>
     </div>
     <div class="form-group">
       <label  class="col-sm-2 control-label">Systolic Pressure</label>
       <div class="col-sm-10">
-        <input type="number" name="systolic_pressure" value="<%=@measurement.systolic_pressure%>" class="form-control">
+        <input type="number" name="systolic_pressure" value="<%=@measurement.systolic_pressure%>" class="form-control" placeholder="Systolic Pressure(mm Hg)">
       </div>
     </div>
     <div class="form-group">
       <label class="col-sm-2 control-label">Diastolic Pressure</label>
       <div class="col-sm-10">
-        <input type="number" name="diastolic_pressure" value="<%=@measurement.diastolic_pressure%>" class="form-control">
+        <input type="number" name="diastolic_pressure" value="<%=@measurement.diastolic_pressure%>" placeholder="Diastolic Pressure(mm Hg)" class="form-control">
       </div>
     </div>
     <div class="form-group">
       <label class="col-sm-2 control-label">Weight</label>
       <div class="col-sm-10">
-        <input type="number" name="weight" value="<%=@measurement.weight%>" class="form-control">
+        <input type="number" name="weight" value="<%=@measurement.weight%>" class="form-control" placeholder="Weight(kg)" >
       </div>
     </div>
     <div class="form-group">
       <label class="col-sm-2 control-label">Measurement Time</label>
       <div class="col-sm-10">
-        <input type="time" name="measurement_time" value="<%=@measurement.measurement_time%>" class="form-control">
+        <input type="datetime-local" name="measurement_time" value="<%=@measurement.measurement_time%>" class="form-control">
       </div>
     </div>
     <div class="form-group">

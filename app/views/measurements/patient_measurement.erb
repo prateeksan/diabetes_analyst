@@ -1,7 +1,7 @@
 <div class="container" style = "margin-top:15%;width:500px" >
-  <% if @patient_foods && @patient_foods.errors.any? %>
+  <% if @patient_measurement && @patient_measurement.errors.any? %>
     <div class="alert alert-warning fade in">
-      <% @patient_foods.errors.full_messages.each do |message| %>
+      <% @patient_measurement.errors.full_messages.each do |message| %>
         <p><%= message %> </p>
       <% end %>
     </div>
