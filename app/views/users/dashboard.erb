@@ -11,10 +11,10 @@
           </a>
       <div class="btn-group-vertical" role="group" aria-label="..." style="margin-top:10%">
         <a href="/user/<%= @user.id %>/foods/new" aria-label="Left Align" class="btn btn-success">
-          New Meal I ate
+          New Meal
         </a>
         <a href="/user/<%=@user.id%>/meds/new " aria-label="Left Align" class="btn btn-success">
-         New Meds I took
+         New Medication
         </a>  
         <a href="/user/<%=@user.id%>/measurements/new" aria-label="Left Align" class="btn btn-success">
           New Measurement
@@ -45,22 +45,27 @@
             Total fat intake:
           </div>
           <div class="col-md-3">
-            Current BMI:
+            Current BMI(Body Mess Index):
+            <super>*</super>
           </div>
         </div>
         <div class="row">
           <div class="col-md-3">
-            2041 
-          </div>
-          <div class="col-md-3">
-            12mg  
-          </div>
-          <div class="col-md-3">
-            24kg
-          </div>
-          <div class="col-md-3">
-          </div>
+        <% food_id_arr = @user.patient_foods.where("meal_time >= ?", Time.new(Time.now.year,Time.now.month,Time.now.day,0,0,0)).map{|meal|meal.food_id}
+         portion_arr = calculate_portion(@user)
+        %>
+        <%= total_kcal(food_id_arr,portion_arr) %> Kcal
         </div>
+        <div class="col-md-3">
+        <%= total_protein(food_id_arr,portion_arr) %> g
+        </div>
+        <div class="col-md-3">
+        <%= total_meal_fat(food_id_arr,portion_arr) %> g
+        </div>
+        <div class="col-md-3">
+        <%= @user_bmi %>
+        </div>
+      </div>
       </div>
     </div>
   </div>

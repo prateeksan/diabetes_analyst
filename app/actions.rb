@@ -28,6 +28,49 @@ helpers do
     html_time = "#{ruby_time[0..9]}T#{ruby_time[11..15]}"
   end
 
+  def calculate_portion(user)
+    food_id_arr = user.patient_foods.where("meal_time >= ?", Time.new(Time.now.year,Time.now.month,Time.now.day,0,0,0)).map{|meal|meal.food_id}
+    food_measure_arr = user.patient_foods.where("meal_time >= ?", Time.new(Time.now.year,Time.now.month,Time.now.day,0,0,0)).map{|meal|meal.measure}
+    food_data_measure_arr = food_id_arr.map {|food_id| Food.find(food_id).measure.to_f}
+    i = 0
+    new_arr = []
+    food_measure_arr.length.times  do
+      new_arr << food_measure_arr[i]/food_data_measure_arr[i]
+    i += 1
+    end
+    new_arr
+  end
+
+  def total_kcal(food_id_arr,portion_arr)
+    i = 0
+    kcal = 0
+    food_id_arr.length.times do
+      kcal += Food.find(food_id_arr[i]).kcal * portion_arr[i]
+      i += 1
+    end
+    kcal
+  end
+
+  def total_protein(food_id_arr,portion_arr)
+    i = 0
+    protein = 0
+    food_id_arr.length.times do
+      protein += Food.find(food_id_arr[i]).protein * portion_arr[i]
+      i += 1
+    end
+    protein
+  end
+
+  def total_meal_fat(food_id_arr,portion_arr)
+    i = 0
+    total_fat = 0
+    food_id_arr.length.times do
+      total_fat += Food.find(food_id_arr[i]).total_fat * portion_arr[i]
+      i += 1
+    end
+    total_fat
+  end
+
 end
 
 # Homepage (Root path)
