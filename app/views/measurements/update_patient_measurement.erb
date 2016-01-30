@@ -1,5 +1,5 @@
 <div class = "container" style = "margin-top:10%">
-  <form class="form-horizontal" method="POST" action="/user/<%=@user.id%>/patient_measurements/<%=@measurement.id%>">
+  <form class="form-horizontal" method="POST" action="/user/<%=@user.id%>/measurements/<%=@measurement.id%>">
     <div class="form-group">
       <label  class="col-sm-2 control-label">Blood Sugar Level</label>
       <div class="col-sm-10">
@@ -25,9 +25,9 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="inputPassword3" class="col-sm-2 control-label">Measurement Time</label>
+      <label class="col-sm-2 control-label">Measurement Time</label>
       <div class="col-sm-10">
-        <input type="datetime" name="measurement_time" value="<%=@measurement.measurement_time%>" class="form-control">
+        <input type="time" name="measurement_time" value="<%=@measurement.measurement_time%>" class="form-control">
       </div>
     </div>
     <div class="form-group">

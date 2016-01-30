@@ -39,6 +39,14 @@ get '/user/signout' do
   redirect '/'
 end
 
+get '/user/foods/new' do
+  if current_user 
+    erb :'/users/foods/new'
+  else
+    redirect '/user/signin'
+  end
+end
+
 get "/autocomplete_food_name" do
   result =[]
   pattern = params["term"].downcase
@@ -124,7 +132,7 @@ end
 
 get '/user/:id/meds/new' do
   @user = current_user
-  erb :'/medication/patient_medication'
+  erb :'/medications/patient_medication'
 end
 
 post '/user/:id/meds' do
@@ -133,16 +141,8 @@ end
 
 get '/user/:id/measurements/new' do
   @user = current_user
-  @measurements_arr = @user.patient_measurements.order("created_at DESC")
-  erb :'/measurement/view_patient_measurement'
+  erb :'/measurements/patient_measurement'
 end
-
-get '/user/:id/patient_measurements/:measure_id/update' do
-  @user = current_user
-  @measurement = @user.patient_measurements.find(params[:measure_id])
-  erb :'/measurement/update_patient_measurement'
-end
-
 
 post '/user/:id/measurements' do
   params[:measurement_time] = add_date_to_time(params[:measurement_time])
@@ -157,9 +157,94 @@ post '/user/:id/measurements' do
   if @patient_measurement.save
     redirect "/user/#{params[:id]}"
   else
-    erb :'/measurement/patient_measurement'
+    erb :'/measurements/patient_measurement'
   end
 end
+
+get '/user/:id/measurements/view' do
+  @user = current_user
+  @measurements_arr = @user.patient_measurements.order("created_at DESC")
+  erb :'/measurements/view_patient_measurement'
+end
+
+get '/user/:id/measurements/:measure_id/update' do
+  @user = current_user
+  @measurement = @user.patient_measurements.find(params[:measure_id])
+  erb :'/measurements/update_patient_measurement'
+end
+
+post '/user/:id/measurements/:measure_id' do
+  @user = current_user
+  @measurement = @user.patient_measurements.find(params[:measure_id])
+  if (@measurement.update(
+    blood_sugar_level: params[:blood_sugar_level],
+    systolic_pressure: params[:systolic_pressure],
+    diastolic_pressure: params[:diastolic_pressure],
+    weight: params[:weight],
+    measurement_time: params[:measurement_time]
+    ))
+  redirect "/user/#{params[:id]}/measurements/view"
+  else
+    erb :"/measurements/update_patient_measurement"
+  end
+end
+#########################
+get '/user/:id/foods/view' do
+  @user = current_user
+  @foods_arr = @user.patient_foods.order("created_at DESC")
+  erb :'/users/foods/view_patient_food'
+end
+
+get '/user/:id/foods/:food_id/update' do
+  @user = current_user
+  @food = @user.patient_foods.find(params[:food_id])
+  erb :'/users/foods/update_patient_food'
+end
+
+# post '/user/:id/foods/:food_id' do
+#   @user = current_user
+#   @food = @user.patient_foods.find(params[:food_id])
+#   if (@food.update(
+#     blood_sugar_level: params[:blood_sugar_level],
+#     systolic_pressure: params[:systolic_pressure],
+#     diastolic_pressure: params[:diastolic_pressure],
+#     weight: params[:weight],
+#     measurement_time: params[:measurement_time]
+#     ))  
+#   redirect "/user/#{params[:id]}/measurements/view"
+#   else
+#     erb :"/measurements/update_patient_measurement"
+#   end
+# end
+# ################
+get '/user/:id/meds/view' do
+  @user = current_user
+  @medications_arr = @user.patient_medications.order("created_at DESC")
+  erb :'/medications/view_patient_medication'
+end
+
+# get '/user/:id/measurements/:measure_id/update' do
+#   @user = current_user
+#   @measurement = @user.patient_measurements.find(params[:measure_id])
+#   erb :'/measurements/update_patient_measurement'
+# end
+
+# post '/user/:id/measurements/:measure_id' do
+#   @user = current_user
+#   @measurement = @user.patient_measurements.find(params[:measure_id])
+#   if (@measurement.update(
+#     blood_sugar_level: params[:blood_sugar_level],
+#     systolic_pressure: params[:systolic_pressure],
+#     diastolic_pressure: params[:diastolic_pressure],
+#     weight: params[:weight],
+#     measurement_time: params[:measurement_time]
+#     ))
+#   redirect "/user/#{params[:id]}/measurements/view"
+#   else
+#     erb :"/measurements/update_patient_measurement"
+#   end
+# end
+##########################
 
 post '/user/signup' do
   @user = User.new(

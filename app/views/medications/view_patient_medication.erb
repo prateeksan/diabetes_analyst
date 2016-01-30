@@ -2,31 +2,28 @@
     <%i=1%>
     <% 10.times do %> 
     <div class="container" style="border:2px solid blue;">
-      <% filter_n_day(i,@foods_arr).each do |food|%>
+      <% filter_n_day(i,@medications_arr).each do |medication|%>
         <div class="panel-default" style="margin-top:2%">
           <div class="panel-heading">
             <div class="row">
               <div class="col-md-8">
-                <h4 class="panel-title">Date: <%= food.created_at %></h4>
+                <h4 class="panel-title">Date: <%= medication.created_at %></h4>
               </div>
               <div class="col-md-4">
-                <a href="/user/<%=@user.id%>/foods/<%= food.id%>/update" aria- label="Left Align" class="btn btn-default"> Edit This
+                <a href="/user/<%=@user.id%>/meds/<%= medication.id%>/update" aria- label="Left Align" class="btn btn-default"> Edit This
                 </a>
               </div>  
             </div>
           </div>
           <div class="panel-body"> 
             <div class="row">
-              Name: <%= food.name %>
+              Name: <%= medication.name %>
             </div>
             <div class="row">
-              Measure: <%= food.measure %>
+              Quantity: <%= medication.quantity %>
             </div>
             <div class="row">
-              Description: <%= food.description %>
-            </div>
-            <div class="row">
-              Meal Time: <%= food.meal_time %>
+              Taken at: <%= medication.medication_time %>
             </div>
           </div>
         </div>
