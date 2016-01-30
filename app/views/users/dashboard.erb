@@ -51,16 +51,13 @@
         </div>
         <div class="row">
           <div class="col-md-3">
-        <% food_id_arr = @user.patient_foods.where("meal_time >= ?", Time.new(Time.now.year,Time.now.month,Time.now.day,0,0,0)).map{|meal|meal.food_id}
-         portion_arr = calculate_portion(@user)
-        %>
-        <%= total_kcal(food_id_arr,portion_arr) %> Kcal
+        <%= @user.nutrient_counter("kcal")[Date.today.to_s.to_sym] %> Kcal
         </div>
         <div class="col-md-3">
-        <%= total_protein(food_id_arr,portion_arr) %> g
+        <%= @user.nutrient_counter("protein")[Date.today.to_s.to_sym]  %> g
         </div>
         <div class="col-md-3">
-        <%= total_meal_fat(food_id_arr,portion_arr) %> g
+        <%= @user.nutrient_counter("total_fat")[Date.today.to_s.to_sym]  %> g
         </div>
         <div class="col-md-3">
         <%= @user_bmi %>
