@@ -7,6 +7,22 @@ helpers do
     Date.today.to_s + " " + time   
   end
 
+  def bmi_calculator(user)
+    if user && user.patient_measurements.last && user.patient_measurements.last.weight
+      (user.patient_measurements.last.weight.to_f / user.height.to_f / user.height.to_f * 10000).floor
+    else
+      0
+    end
+  end
+    
+  def filter_n_day(n,arr)
+    if n == 0
+      new_arr = arr.where(created_at: (Time.now-((Time.now.hour*3600)+(Time.now.min*60)+Time.now.sec))..Time.now)
+    else
+      new_arr = arr.where(created_at: (n.day.ago-((Time.now.hour*3600)+(Time.now.min*60)+Time.now.sec))..((n-1).day.ago-((Time.now.hour*3600)+(Time.now.min*60)+Time.now.sec)))
+    end
+  end
+  
   def date_time_now_for_html
     ruby_time = (Time.now - 18000).to_s
     html_time = "#{ruby_time[0..9]}T#{ruby_time[11..15]}"
@@ -34,6 +50,14 @@ end
 get '/user/signout' do
   session[:user_id] = nil
   redirect '/'
+end
+
+get '/user/foods/new' do
+  if current_user 
+    erb :'/users/foods/new'
+  else
+    redirect '/user/signin'
+  end
 end
 
 get "/autocomplete_food_name" do
@@ -79,8 +103,8 @@ post '/user/signin' do
 end
 
 get '/user/:id' do
-  @user = current_user
-  if @user
+  if @user = current_user
+    @user_bmi = bmi_calculator(@user)
     erb :'/users/dashboard'
   else
     redirect '/user/signin'
@@ -121,7 +145,7 @@ end
 
 get '/user/:id/meds/new' do
   @user = current_user
-  erb :'/medication/patient_medication'
+  erb :'/medications/patient_medication'
 end
 
 post '/user/:id/meds' do
@@ -130,10 +154,11 @@ end
 
 get '/user/:id/measurements/new' do
   @user = current_user
-  erb :'/measurement/patient_measurement'
+  erb :'/measurements/patient_measurement'
 end
 
 post '/user/:id/measurements' do
+  @user = current_user
   params[:measurement_time] = add_date_to_time(params[:measurement_time])
   @patient_measurement = PatientMeasurement.new(
     blood_sugar_level: params[:blood_sugar_level],
@@ -146,9 +171,95 @@ post '/user/:id/measurements' do
   if @patient_measurement.save
     redirect "/user/#{params[:id]}"
   else
-    erb :'/measurement/patient_measurement'
+    erb :'/measurements/patient_measurement'
   end
 end
+
+get '/user/:id/measurements/view' do
+  @user = current_user
+  @measurements_arr = @user.patient_measurements.order("created_at DESC")
+  erb :'/measurements/view_patient_measurement'
+end
+
+get '/user/:id/measurements/:measure_id/update' do
+  @user = current_user
+  @measurement = @user.patient_measurements.find(params[:measure_id])
+  erb :'/measurements/update_patient_measurement'
+end
+
+post '/user/:id/measurements/:measure_id' do
+  @user = current_user
+  @measurement = @user.patient_measurements.find(params[:measure_id])
+  if (@measurement.update(
+    blood_sugar_level: params[:blood_sugar_level],
+    systolic_pressure: params[:systolic_pressure],
+    diastolic_pressure: params[:diastolic_pressure],
+    weight: params[:weight],
+    measurement_time: params[:measurement_time]
+    ))
+  redirect "/user/#{params[:id]}/measurements/view"
+  else
+    erb :"/measurements/update_patient_measurement"
+  end
+end
+#########################
+get '/user/:id/foods/view' do
+  @user = current_user
+  @foods_arr = @user.patient_foods.order("created_at DESC")
+  erb :'/users/foods/view_patient_food'
+end
+
+get '/user/:id/foods/:food_id/update' do
+  @user = current_user
+  @food = @user.patient_foods.find(params[:food_id])
+  erb :'/users/foods/update_patient_food'
+end
+
+post '/user/:id/foods/:food_id' do
+  @user = current_user
+  @food = @user.patient_foods.find(params[:food_id])
+  if (@food.update(
+    name: @food.name,
+    user_id: current_user.id,
+    food_id: @food.id,
+    measure: params[:measure],
+    meal_time: params[:meal_time],
+    description: params[:description]
+    ))  
+  redirect "/user/#{params[:id]}/measurements/view"
+  else
+    erb :"/measurements/update_patient_measurement"
+  end
+end
+################
+get '/user/:id/meds/view' do
+  @user = current_user
+  @medications_arr = @user.patient_medications.order("created_at DESC")
+  erb :'/medications/view_patient_medication'
+end
+
+# get '/user/:id/measurements/:measure_id/update' do
+#   @user = current_user
+#   @measurement = @user.patient_measurements.find(params[:measure_id])
+#   erb :'/measurements/update_patient_measurement'
+# end
+
+# post '/user/:id/measurements/:measure_id' do
+#   @user = current_user
+#   @measurement = @user.patient_measurements.find(params[:measure_id])
+#   if (@measurement.update(
+#     blood_sugar_level: params[:blood_sugar_level],
+#     systolic_pressure: params[:systolic_pressure],
+#     diastolic_pressure: params[:diastolic_pressure],
+#     weight: params[:weight],
+#     measurement_time: params[:measurement_time]
+#     ))
+#   redirect "/user/#{params[:id]}/measurements/view"
+#   else
+#     erb :"/measurements/update_patient_measurement"
+#   end
+# end
+##########################
 
 post '/user/signup' do
   @user = User.new(
