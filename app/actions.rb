@@ -6,6 +6,12 @@ helpers do
   def add_date_to_time(time)
     Date.today.to_s + " " + time   
   end
+
+  def date_time_now_for_html
+    ruby_time = (Time.now - 18000).to_s
+    html_time = "#{ruby_time[0..9]}T#{ruby_time[11..15]}"
+  end
+
 end
 
 # Homepage (Root path)
@@ -168,6 +174,7 @@ end
 
 post "/user/:id/foods" do
   @food = Food.find_by(name: params[:name])
+  @meal = "#{params["meal"]}"
   if @food
     @patient_food = PatientFood.new(
       name: @food.name,
@@ -178,12 +185,19 @@ post "/user/:id/foods" do
       description: params[:description] 
       )
     if @patient_food.save
-      redirect '/'
+      if params["submit_food"]
+        @meal = nil
+        redirect "/user/#{current_user.id}"
+      elsif params["add_food"]
+        @meal += "_#{@patient_food.name}_"
+        @present_date_time = params[:meal_time]
+        erb :'users/foods/new'
+      end
     else
       erb :'users/foods/new'
     end
   else
-    @error = "This food item is not in our database :("
+    @error = "This food item is not in our database"
     erb :'users/foods/new'
   end
 end
@@ -197,5 +211,4 @@ get '/user/measurements/graphs' do
   @sugar_values = @user.extracting_blood_sugar
   # @sugar_values
   erb :'/measurements/graphs'  
-
 end

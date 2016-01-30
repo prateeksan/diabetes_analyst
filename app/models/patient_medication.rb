@@ -1,6 +1,5 @@
 class PatientMedication < ActiveRecord::Base
 
-   :medication
-
+  belongs_to :user
 
 end 
