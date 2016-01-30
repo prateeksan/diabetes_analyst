@@ -1,52 +1,44 @@
-<!doctype html>
-<html>
-  <head>
-    <title>Doughnut Chart</title>
-    <script src="../src/Chart.Core.js"></script>
-    <script src="../src/Chart.Doughnut.js"></script>
-    <style>
-      body{
-        padding: 0;
-        margin: 0;
-      }
-      #canvas-holder{
-        width:30%;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="canvas-holder">
-      <canvas id="chart-area" width="500" height="500"/>
+
+    <div class ="container">
+    <div id="grafico1" style="width:433px; height:62px;">
+      <canvas id="2016-01-02" width="500" height="500"/>
     </div>
-
-
+    </div>
+<div class ="container">
+<div id="grafico" style="width:433px; height:62px;">
+      <canvas id="2016-01-03" width="500" height="500"/>
+    </div>
+</div>
   <script>
-    var doughnutData = [
+    
+      window.onload = function(){
+        
+        <%@valores.each do |key,value|%>
+        var doughnutData = [
         {
-          value: 1,
+          value: <%=value[0].to_json%>,
           label: "One"
         },
         {
-          value: 2,
+          value: <%=value[1].to_json%>,
           label: "Two"
         },
         {
-          value: 3,
+          value: <%=value[2].to_json%>,
           label: "Three"
         },
         {
-          value: 4,
+          value: <%=value[3].to_json%>,
           label: "Four"
         },
         {
-          value: 5,
+          value: <%=value[4].to_json%>,
           label: "Five"
         }
       ];
-      window.onload = function(){
-        var ctx = document.getElementById("chart-area").getContext("2d");
+        var ctx = document.getElementById(<%=key.to_s.to_json%>).getContext("2d");
         window.myDoughnut = new Chart(ctx).Doughnut(doughnutData, {responsive : true});
+        <%end%>
       };
   </script>
-  </body>
-</html>
+  

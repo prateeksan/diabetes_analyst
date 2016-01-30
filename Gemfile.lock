@@ -63,6 +63,8 @@ GEM
       rack-test
       sinatra (~> 1.4.0)
       tilt (>= 1.3, < 3)
+    sinatra-partial (0.4.0)
+      sinatra
     slop (3.6.0)
     sqlite3 (1.3.11)
     thread_safe (0.3.5)
@@ -90,6 +92,7 @@ DEPENDENCIES
   sinatra
   sinatra-activerecord
   sinatra-contrib
+  sinatra-partial
   sqlite3
   tux
 

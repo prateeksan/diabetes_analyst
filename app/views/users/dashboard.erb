@@ -1,36 +1,12 @@
-<div class="btn-group-vertical" role="group" aria-label="..." style=";margin-left:2%;margin-top:10%;">
-  <a href="/user/<%= @user.id %>/foods/new" aria-label="Left Align" class="btn btn-default">
-  New Meal I ate
-  </a>
-  <a href="/user/<%=@user.id%>/meds/new" aria-label="Left Align" class="btn btn-default">
-  New Meds I took
-  </a>  
-  <a href="/user/<%=@user.id%>/measurements/new" aria-label="Left Align" class="btn btn-default">
-  New Measurement
-  </a>
-  <a href="/user/<%=@user.id%>/edit" aria-label="Left Align" class="btn btn-default">
-  Update Profile
-  </a>
-</div>
-
-<div class="container" style="border:2px solid black;width:70%;margin-left:200px;margin-top:-100px">
+<div class="container">
   <div class="row">
-    <div class="col-md-3">
-    Total calorie intake:
-    </div>
-    <div class="col-md-3">
-    Total protein intake:
-    </div>
-    <div class="col-md-3">
-    Total fat intake:
-    </div>
-    <div class="col-md-3">
-    Current BMI:
+    <div style="text-align:center;width:25%;margin-left:38%;margin-top:10%">
+      <h1><p class="text-primary">Daily Report</p></h1>
     </div>
   </div>
   <div class="row">
     <div class="col-md-3">
-    2041 
+
     </div>
     <div class="col-md-3">
     12mg  
@@ -68,7 +44,62 @@
     12
     </div>
     <div class="col-md-3">
+      <a href="/user/<%=@user.id%>/edit" aria-label="Left Align" class="btn btn-primary">
+            Update Profile
+          </a>
+      <div class="btn-group-vertical" role="group" aria-label="..." style="margin-top:10%">
+        <a href="/user/<%= @user.id %>/foods/new" aria-label="Left Align" class="btn btn-success">
+          New Meal I ate
+        </a>
+        <a href="/user/<%=@user.id%>/meds/new " aria-label="Left Align" class="btn btn-success">
+         New Meds I took
+        </a>  
+        <a href="/user/<%=@user.id%>/measurements/new" aria-label="Left Align" class="btn btn-success">
+          New Measurement
+        </a>
+      </div>
+      <div class="btn-group-vertical" role="group" aria-label="..." style="margin-top:10%">
 
+        <a href="/user/<%=@user.id%>/foods/view" aria-label="Left Align" class="btn btn-info">
+              View Recent Meals
+        </a>
+        <a href="/user/<%=@user.id%>/meds/view" aria-label="Left Align" class="btn btn-info">
+              View Recent Mecations
+        </a>
+        <a href="/user/<%=@user.id%>/measurements/view" aria-label="Left Align" class="btn btn-info">
+             View Recent Measurements
+        </a>
+      </div>
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+          <div class="col-md-3">
+            Total calorie intake:
+          </div>
+          <div class="col-md-3">
+            Total protein intake:
+          </div>
+          <div class="col-md-3">
+            Total fat intake:
+          </div>
+          <div class="col-md-3">
+            Current BMI:
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            2041 
+          </div>
+          <div class="col-md-3">
+            12mg  
+          </div>
+          <div class="col-md-3">
+            24kg
+          </div>
+          <div class="col-md-3">
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

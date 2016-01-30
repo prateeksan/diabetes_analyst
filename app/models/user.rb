@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
   
   has_secure_password
-  has_many :patient_measurements 
+
+  has_many :patient_measurements
   has_many :patient_foods
   has_many :patient_medications
 
@@ -63,7 +64,7 @@ class User < ActiveRecord::Base
   def unify_meals_per_day
   user = self
   meals = {}
-  sorted_food = user.patient_foods.order(:meal_time)
+  sorted_food = user.patient_foods.order(:meal_time )
   unique_days = sorted_food.select(:meal_time).uniq
   unique_days.each do |date|
     begining_day = date.meal_time.to_date.to_datetime
@@ -74,7 +75,7 @@ class User < ActiveRecord::Base
 end
 
 
-  def nutrient_counter(nutrient)
+  def nutrient_counter_history(nutrient)
     meals = self.unify_meals_per_day
     result = {}
     meals.each do |day, foods|
@@ -88,8 +89,14 @@ end
     result
   end
 
+
+  def nutrient_counter_day(nutrient)
+
+  end
+
   def bmi_calculator
     (self.patient_measurements.last.weight.to_f / self.height.to_f / self.height.to_f * 10000).floor
   end
+
 
 end

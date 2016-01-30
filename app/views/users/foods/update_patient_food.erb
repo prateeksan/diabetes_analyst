@@ -47,23 +47,7 @@
         <button type="submit" class="btn btn-default" name="submit_food" id="submit_food" value="submit">Save and Return</button>
       </div>
     </div>
-    <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-10">
-        <input type="hidden" name="meal" value = "<%= @meal || "" %>" >
-        <button type="submit" class="btn btn-default" name= "add_food" id="add_food" value="add">Save Add Another</button>
-      </div>
-    </div>
   </form>
 </div>
-<% if @meal && @meal != "" %>
-  <div class = "container well">
-    <h5> <strong>Already Added</strong> </h5>
-    <% food_names = @meal.scan(/_(.*?)_/) %>
-    <ol class="list-inline" id="previous_foods">
-      <% food_names.each do |name| %>
-        <li><i class="fa fa-cutlery"></i> <%= name[0] %></li>
-      <% end %>
-    </ol>
-  </div>
-<% end %>
+
 <script type="text/javascript" src="/javascript/autocomplete.js"></script>

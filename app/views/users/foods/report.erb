@@ -1,0 +1,46 @@
+<%@meals.keys.each do |key|%>
+  <div class="row" >
+  <div class ="container">
+    <div id="grafico1" style="width:433px; height:62px;">
+    <h1><%= key.to_s %></h1>
+      <canvas id=<%= key.to_s %> width="500" height="500"/>
+      </canvas>
+      </div>
+    </div>
+  </div>
+<%end%>
+
+<script>
+    
+      window.onload = function(){
+        
+        <%@meals.keys.each do |key|%>
+        var doughnutData = [
+        {
+          value: <%=@carbs[key].to_json%>,
+          label: "Carbs"
+        },
+        {
+          value: <%=@protein[key].to_json%>,
+          label: "Protein"
+        },
+        {
+          value: <%=@sugar[key].to_json%>,
+          label: "Sugar"
+        },
+        {
+          value: <%=@fiber[key].to_json%>,
+          label: "Fiber"
+        },
+        {
+          value: <%=@fat[key].to_json%>,
+          label: "Fat"
+        }
+      ];
+        var ctx = document.getElementById(<%=key.to_s.to_json%>).getContext("2d");
+        window.myDoughnut = new Chart(ctx).Doughnut(doughnutData, {responsive : true});
+        <%end%>
+      };
+  </script>
+
+  
