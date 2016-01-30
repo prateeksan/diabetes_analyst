@@ -11,7 +11,6 @@ helpers do
     ruby_time = (Time.now - 18000).to_s
     html_time = "#{ruby_time[0..9]}T#{ruby_time[11..15]}"
   end
-  #2201-03-03T21:03
 
 end
 
@@ -174,8 +173,6 @@ post '/user/signup' do
 end
 
 post "/user/:id/foods" do
-    @meal ||= []
-    binding.pry
   @food = Food.find_by(name: params[:name])
   if @food
     @patient_food = PatientFood.new(
@@ -189,10 +186,10 @@ post "/user/:id/foods" do
     
     if @patient_food.save
       if params["submit_food"]
-        @meal = []
+        @meal = nil
         redirect "/user/#{current_user.id}"
       elsif params["add_food"]
-        @meal << @patient_food
+        @meal = params["meal"] + "_#{@patient_food.name}_"
         @present_date_time = params[:meal_time]
         erb :'users/foods/new'
       end
@@ -214,5 +211,4 @@ get '/user/measurements/graphs' do
   @sugar_values = @user.extracting_blood_sugar
   # @sugar_values
   erb :'/measurements/graphs'  
-
 end
