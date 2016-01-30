@@ -3,6 +3,7 @@ class CreatePatientMedicationsTable < ActiveRecord::Migration
      create_table :patient_medications do |t|
       t.references :user
       t.references :medication
+      t.integer :din
       t.string :name
       t.float :quantity
       

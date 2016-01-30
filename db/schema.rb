@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 20160128192029) do
   create_table "patient_medications", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "medication_id"
+    t.integer  "din"
     t.string   "name"
     t.float    "quantity"
     t.datetime "medication_time"

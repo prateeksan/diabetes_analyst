@@ -71,8 +71,6 @@ get "/autocomplete_food_name" do
     end
   end
   result.to_json
-  # content_type :json
-  # [params["term"]].to_json
 end
 
 get "/fooditem" do
@@ -81,6 +79,27 @@ get "/fooditem" do
   item_name = item.measure
   content_type :json
   "#{item_name}".to_json
+end
+
+get "/autocomplete_med_name" do
+  result =[]
+  pattern = params["term"].downcase
+  if pattern.length >= 2
+    content_type :json
+    matches = Medication.where("lower(name) LIKE '#{pattern}%'")
+    matches.each do |match|
+      result << match[:name]
+    end
+  end
+  result.to_json
+end
+
+get "/meditem" do
+  med_name = params[:med_name]
+  item = Medication.find_by(name: "#{med_name}")
+  item_din = item.din
+  content_type :json
+  "#{item_din}".to_json
 end
 
 post '/user/signin' do 
@@ -144,12 +163,43 @@ post '/user/:id/edit' do
 end
 
 get '/user/:id/meds/new' do
-  @user = current_user
-  erb :'/medications/patient_medication'
+  # @user = current_user
+  # erb :'/medications/patient_medication'
+  if current_user.id == params[:id].to_i
+    erb :'/medications/new'
+  else
+    redirect '/user/signin'
+  end
 end
 
 post '/user/:id/meds' do
-
+  @med = Medication.find_by(name: params[:name])
+  @meds = "#{params["meds"]}"
+  if @med
+    @patient_med = PatientMedication.new(
+      name: @med.name,
+      user_id: current_user.id,
+      medication_id: @med.id,
+      quantity: params[:quantity],
+      din: params[:din],
+      medication_time: params[:medication_time]
+      )
+    if @patient_med.save
+      if params["submit_med"]
+        @meds = nil
+        redirect "/user/#{current_user.id}"
+      elsif params["add_med"]
+        @meds += "_#{@patient_med.name}_"
+        @present_date_time = params[:medication_time]
+        erb :'/medications/new'
+      end
+    else
+      erb :'/medications/new'
+    end
+  else
+    @error = "This medicine is not in our database"
+    erb :'/medications/new'
+  end
 end
 
 get '/user/:id/measurements/new' do
