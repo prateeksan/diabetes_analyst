@@ -381,9 +381,67 @@ get '/aboutus' do
   erb :"about"
 end
 
-get '/user/measurements/graphs' do
-  @user = current_user
-  @sugar_values = @user.extracting_blood_sugar
-  # @sugar_values
-  erb :'/measurements/graphs'  
+
+###Experimental stuff
+get '/user/:id/measurements/graphs' do
+  @user = User.find(params[:id])
+  @sugar_values = @user.extracting_measurements_for_graph("sugar_level")
+  @pressure_values = @user.extracting_measurements_for_graph("pressure")
+  @weight_values = @user.extracting_measurements_for_graph("weight")
+  erb :'/measurements/graphs' 
 end
+
+get '/user/:id/foods/report' do
+  @user = User.find(params[:id])
+  @meals = @user.unify_meals_per_day
+  @calories = @user.nutrient_counter("kcal")
+  @carbs = @user.nutrient_counter("carbohydrate")
+  @protein = @user.nutrient_counter("protein")
+  @sugar = @user.nutrient_counter("total_sugar")
+  @fiber = @user.nutrient_counter("total_dietary_fibre")
+  @fat = @user.nutrient_counter("total_fat")
+  erb :'/users/foods/report'
+end
+
+
+# get '/report' do
+# content_type 'application/pdf'
+
+# pdf = Prawn::Document.new
+# current_user.nutrient_counter_history("carbohydrate").each do |date,value|
+# pdf.text  "On #{date} consumed #{value} carbs"
+# end
+# pdf.render
+
+# end
+
+get '/report' do
+  @user = current_user
+  @sugar_values = @user.extracting_measurements_for_graph("sugar_level")
+  @pressure_values = @user.extracting_measurements_for_graph("pressure")
+  @weight_values = @user.extracting_measurements_for_graph("weight")
+  #binding.pry
+  image_link = Gchart.line_xy( :theme => :thirty7signals, 
+                      :title => 'Blood sugar level',
+                      :data => [(1..@sugar_values[0].length).to_a,@sugar_values[1]],
+                      :axis_with_labels => ['y'],
+                      :size => '400x400',
+                      :axis_labels => [[1,2,3,4,5],[100,150,200,250]],
+                      #:legend => results.keys,
+                      :encoding => 'text',
+                      :max_value => 'false'
+                     ).sub!('chds=,', 'chds=a')
+
+
+
+
+# pdf = Prawn::Document.new
+# pdf.image open([image_link,"pnj"].join("."))
+# #pdf.image open("https://upload.wikimedia.org/wikipedia/en/7/7e/PGN_logo.jpg")
+# pdf.render
+ Prawn::Document.generate("blood_sugar.pdf") do 
+    image open(image_link)
+      end
+# Prawn::Document.render_file "remote_images.pdf"
+end
+

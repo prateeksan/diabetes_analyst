@@ -1,25 +1,136 @@
+    <script>
+    var sugarChartData = {
+      labels : <%=@sugar_values[0].to_json%>,
+      datasets : [
+        {
+          label: "Blood sugar level",
+          fillColor : "rgba(220,220,220,0.2)",
+          strokeColor : "rgba(220,220,220,1)",
+          pointColor : "rgba(220,220,220,1)",
+          pointStrokeColor : "#fff",
+          pointHighlightFill : "#fff",
+          pointHighlightStroke : "rgba(220,220,220,1)",
+          data : <%=@sugar_values[1].to_json%> 
+        }
+      ]
+    }
 
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable(<%=@sugar_values%>);
-
-        var options = {
-          title: 'Blood sugar levels',
-          //curveType: 'function',
-          legend: { position: 'bottom' }
-        };
-
-        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-
-        chart.draw(data, options);
-      }
-    </script>
+    var weightChartData = {
+      labels : <%=@weight_values[0].to_json%>,
+      datasets : [
+        {
+          label: "My First dataset",
+          fillColor : "rgba(220,220,220,0.2)",
+          strokeColor : "rgba(220,220,220,1)",
+          pointColor : "rgba(220,220,220,1)",
+          pointStrokeColor : "#fff",
+          pointHighlightFill : "#fff",
+          pointHighlightStroke : "rgba(220,220,220,1)",
+          data : <%=@weight_values[1].to_json%> 
+        }
+      ]
+    }
 
 
+    var pressureChartData = {
+      labels : <%=@pressure_values[0].to_json%>,
+      datasets : [
+        {
+          label: "Systolic",
+          fillColor : "rgba(220,220,220,0.2)",
+          strokeColor : "rgba(220,220,220,1)",
+          pointColor : "rgba(220,220,220,1)",
+          pointStrokeColor : "#fff",
+          pointHighlightFill : "#fff",
+          pointHighlightStroke : "rgba(220,220,220,1)",
+          data : <%=@pressure_values[1].to_json%>
+        },
+        {
+          label: "Diastolic",
+          fillColor : "rgba(151,187,205,0.2)",
+          strokeColor : "rgba(151,187,205,1)",
+          pointColor : "rgba(151,187,205,1)",
+          pointStrokeColor : "#fff",
+          pointHighlightFill : "#fff",
+          pointHighlightStroke : "rgba(151,187,205,1)",
+          data : <%=@pressure_values[2].to_json%>
+        }
+      ]
+    }
 
-    <div id="curve_chart" style="width: 900px; height: 500px; margin-top:10%"></div>
-  
 
+   
+
+
+  window.onload = function(){
+    var ctx0 = document.getElementById("blood_sugar").getContext("2d");
+    ctx0.canvas.width = 200;
+    ctx0.canvas.height = 200;
+    window.myLine = new Chart(ctx0).Line(sugarChartData, {
+      responsive: true
+    });
+
+    var ctx1= document.getElementById("weight").getContext("2d");
+    ctx1.canvas.width = 200;
+    ctx1.canvas.height = 200;
+    window.myLine = new Chart(ctx1).Line(weightChartData, {
+      responsive: true
+    });
+
+    var ctx2= document.getElementById("blood_pressure").getContext("2d");
+    ctx2.canvas.width = 200;
+    ctx2.canvas.height = 200;
+    window.myLine = new Chart(ctx2).Line(pressureChartData, {
+      responsive: true
+    });
+
+    
+  }
+  </script>
+
+
+
+
+   
+<div class="jumbotron" style="margin: 10% 5%">
+  <div class="row"> 
+    <div class="col-md-3" width="50%" height="50%">
+    </div>
+    <div class="col-md-6" width="50%" height="50%">
+        <div class ="container">
+          <h4>Blood sugar level</h4>
+          <canvas id="blood_sugar"></canvas>
+        </div>
+    </div>
+    <div class="col-md-6" width="50%" height="50%">
+    </div>
+  </div>
+  <div class="row"> 
+    <div class="col-md-3" width="50%" height="50%">
+    </div>
+    <div class="col-md-6" width="50%" height="50%"> 
+        <div class ="container">
+          <br>
+          <br>
+          <h4>Blood pressure</h4>
+          <canvas id="blood_pressure" ></canvas>
+        </div>
+    </div>
+    <div class="col-md-6" width="50%" height="50%">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3" width="50%" height="50%">
+    </div> 
+    <div class="col-md-6" width="50%" height="50%"> 
+        <div class ="container">
+          <br>
+          <br>          
+          <h4>Weight</h4>
+          <canvas id="weight" ></canvas>
+        </div>
+    </div>
+    <div class="col-md-6" width="50%" height="50%">
+    </div>
+  </div>
+</div>

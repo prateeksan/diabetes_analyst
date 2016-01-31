@@ -31,7 +31,7 @@
     padding: 0;
     margin: 0;
     opacity: 1;
-    transition: 0s
+    transition: 0s  
 }
 </style>
 <div class="container">
@@ -83,7 +83,7 @@
             </div>
             <div class="row">
               <h4 class="text-info">
-              <% if !@user.patient_foods.empty? && @user.patient_foods.select {|food|food.meal_time.nil?}.empty?%>
+              <% if @user.nutrient_counter("kcal").keys.include?(time_now_to_midnight.to_sym)%>
               <%= kcal=@user.nutrient_counter("kcal")[time_now_to_midnight.to_sym].round(2) %> Kcal
               <% else %>
                <%=kcal=0%>
@@ -97,7 +97,7 @@
             </div>
             <div class="row">
             <h4 class="text-info">
-              <% if !@user.patient_foods.empty? && @user.patient_foods.select {|food|food.meal_time.nil?}.empty?%>
+              <% if  @user.nutrient_counter("protein").keys.include?(time_now_to_midnight.to_sym)%>
               <%= protein=@user.nutrient_counter("protein")[time_now_to_midnight.to_sym].round(2)  %> g
                <% else %>
               <%= protein=0 %>
@@ -111,7 +111,7 @@
             </div>
             <div class="row">
               <h4 class="text-info">
-             <% if !@user.patient_foods.empty? && @user.patient_foods.select {|food|food.meal_time.nil?}.empty?%>
+             <% if  @user.nutrient_counter("total_fat").keys.include?(time_now_to_midnight.to_sym)%>
               <%= fat=@user.nutrient_counter("total_fat")[time_now_to_midnight.to_sym].round(2)  %> g
              <% else %>
               <%= fat=0 %>
