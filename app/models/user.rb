@@ -81,7 +81,6 @@ end
       amount = 0
       foods.each do |food_item|
         amount += Food.find(food_item.food_id)[nutrient.to_sym] * food_item.measure
-        #binding.pry
       end
       result[day] = amount
     end
