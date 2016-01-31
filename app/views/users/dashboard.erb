@@ -76,7 +76,7 @@
             </div>
             <div class="row">
               <h4 class="text-info">
-              <% unless @user.patient_foods.select {|food|food.meal_time.nil?}.empty?%>
+              <% if @user.patient_foods.select {|food|food.meal_time.nil?}.empty?%>
               <%= kcal=@user.nutrient_counter("kcal")[time_now_to_midnight.to_sym] %> Kcal
               <% else %>
                <%=kcal=0%>
@@ -90,7 +90,7 @@
             </div>
             <div class="row">
             <h4 class="text-info">
-              <% unless @user.patient_foods.select {|food|food.meal_time.nil?}.empty?%>
+              <% if @user.patient_foods.select {|food|food.meal_time.nil?}.empty?%>
               <%= protein=@user.nutrient_counter("protein")[time_now_to_midnight.to_sym]  %> g
                <% else %>
               <%= protein=0 %>
@@ -104,7 +104,7 @@
             </div>
             <div class="row">
               <h4 class="text-info">
-             <% unless @user.patient_foods.select {|food|food.meal_time.nil?}.empty?%>
+             <% if @user.patient_foods.select {|food|food.meal_time.nil?}.empty?%>
               <%= fat=@user.nutrient_counter("total_fat")[time_now_to_midnight.to_sym]  %> g
              <% else %>
               <%= fat=0 %>
@@ -117,7 +117,7 @@
               <h5><super>*</super>Current BMI(Body Mess Index):</h5>
             </div>
             <div class="row">
-              <h4 class="text-info"><%= bmi_calculator(@user) %></h4>
+              <h4 class="text-info"><%#= bmi_calculator(@user) %></h4>
             </div>
           </div>
         </div>

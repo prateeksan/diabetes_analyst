@@ -13,9 +13,7 @@
     See: http://necolas.github.com/normalize.css/
   -->  
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-​
-  <link rel="stylesheet" href="/stylesheets/normalize.css">
-  <!--
+​  <!--
     application.css is where you put your styles
   -->
 ​
@@ -42,12 +40,12 @@
   <link rel="stylesheet" href="/stylesheets/application.css">
   <link rel="stylesheet" href="/stylesheets/freelancer.css">
 ​
-  <title></title>
+  <title>Fresh Pulse</title>
 </head>
 <body id="page-top" class="index">
 ​
 <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
+    <div class="container" id="navbar-container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -56,7 +54,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Diet Report</a>
+            <a class="navbar-brand" href="/">Fresh Pulse</a>
         </div>
 ​
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -66,26 +64,23 @@
                     <a href="#page-top"></a>
                 </li>
                 <li class="page-scroll">
-                    <a href="/aboutus">About</a>
-                </li>
-                <li class="page-scroll">
                   <% if current_user %>
-                    <a href="/user/<%= current_user.id %>">Dashboard</a>
+                    <a href="/user/<%= current_user.id %>"><i class="fa fa-tachometer"></i> Dashboard</a>
                   <% end %>
                 </li>
                 <li class="page-scroll">
                   <% unless current_user %>
-                    <a href="/user/signin">Sign in</a>
+                    <a href="/user/signin"><i class="fa fa-sign-in"></i> Sign in</a>
                     <% end %>
                 </li>
                 <li class="page-scroll">
                   <% unless current_user %>
-                    <a href="/user/signup">Sign up</a>
+                    <a href="/user/signup"><i class="fa fa-user-plus"></i> Sign up</a>
                   <% end %>
                 </li>
                 <li class="page-scroll">
                   <% if current_user %>
-                    <a href="/user/signout">Sign Out</a>
+                    <a href="/user/signout"><i class="fa fa-sign-out"></i> Sign Out</a>
                   <% end %>
                 </li>
             </ul>
@@ -113,6 +108,9 @@
     <!-- Jquery UI autocomplete -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js"></script>
     <script src="/javascript/application.js"></script>
+
+    <!-- Custom Scroll Script -->
+    <script type="text/javascript" src="/javascript/opaquescrolling.js"></script>
 
 </body>
 </html>
