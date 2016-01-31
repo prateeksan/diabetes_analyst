@@ -1,17 +1,19 @@
 <style>
 .btn {
     position: relative;
-    background-color: #4CAF50;
     border: none;
-    color: #FFFFFF;
-    padding: 20px;
-    width: 200px;
+    color: #AC8364;
+    background: none;
+    padding: 5px 60px;
+    width: auto;
     text-align: center;
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
     text-decoration: none;
     overflow: hidden;
     cursor: pointer;
+    font-size: 110%;
+    margin-top: 1%;
 }
 
 .btn:after {
@@ -45,17 +47,51 @@
       <div class="col-md-4">
         <div class="row" style="margin-top:3% 1%; text-align:center">
           <div class="col-md-12 well" style="margin-right: 1%; height: 450px">
-            <div class="row">
+<!--             <div class="row">
               <h5>Menu</h5>
-            </div>
+            </div> -->
             <div class="row">
-              
+              <div class="btn-group-vertical" role="group" aria-label="..." style="margin-top:1%">
+                <a href="/user/<%=@user.id%>/edit" aria-label="Left Align" class="btn btn-success">
+                    Update Profile
+                </a>
+                <a href="/user/<%= @user.id %>/foods/new" aria-label="Left Align" class="btn btn-success">
+                  New Meal
+                </a>
+                <a href="/user/<%=@user.id%>/meds/new " aria-label="Left Align" class="btn btn-success">
+                  New Medication
+                </a>  
+                <a href="/user/<%=@user.id%>/measurements/new" aria-label="Left Align" class="btn btn-success">
+                  New Measurement
+                </a>
+                <a href="/user/<%=@user.id%>/measurements/graphs " aria-label="Left Align" class="btn btn-success">
+                Measurement Report
+                </a>
+                <a href="/user/<%=@user.id%>/foods/report " aria-label="Left Align" class="btn btn-success">
+                Daily Meal Report 
+                </a>
+                <a href="/user/<%=@user.id%>/measurements/graphs " aria-label="Left Align" class="btn btn-success">
+                  Measurement Report
+                </a>
+                <a href="/user/<%=@user.id%>/foods/report " aria-label="Left Align" class="btn btn-success">
+                  Daily Meal Report 
+                </a>
+                <a href="/user/<%=@user.id%>/foods/view" aria-label="Left Align" class="btn btn-success">
+                  Edit Recent Meals
+                </a>
+                <a href="/user/<%=@user.id%>/meds/view" aria-label="Left Align" class="btn btn-success">
+                  Edit Recent Mecations
+                </a>
+                <a href="/user/<%=@user.id%>/measurements/view" aria-label="Left Align" class="btn btn-success">
+                  Edit Recent Measurements
+                </a>
+              </div>
             </div>
           </div>
         </div>
 
         <div class="row" style="margin-top:3% 1%; text-align:center">
-          <div class="col-md-12 well" style="margin-right: 1%; height: 150px">
+          <div class="col-md-12 well" style="margin: 1%; height: 150px">
             <div class="row">
               <h5>Recommended limit fat intake /day:</h5>
             </div>
@@ -69,35 +105,27 @@
             </div>
           </div>
         </div>
-<!--         <div class="btn-group-vertical" role="group" aria-label="..." style="margin-top:10%">
-          <a href="/user/<%=@user.id%>/edit" aria-label="Left Align" class="btn btn-primary">
-              Update Profile
-          </a>
-          <br/>
-          <a href="/user/<%= @user.id %>/foods/new" aria-label="Left Align" class="btn btn-success">
-            New Meal
-          </a>
+<!--         
+
           <a href="/user/<%=@user.id%>/meds/new " aria-label="Left Align" class="btn btn-success">
            New Medication
           </a>  
           <a href="/user/<%=@user.id%>/measurements/new" aria-label="Left Align" class="btn btn-success">
             New Measurement
           </a>
-          <br/>
           <a href="/user/<%=@user.id%>/measurements/graphs " aria-label="Left Align" class="btn btn-success">
           Measurement Report
           </a>
           <a href="/user/<%=@user.id%>/foods/report " aria-label="Left Align" class="btn btn-success">
           Daily Meal Report 
           </a>
-          <br/>
-          <a href="/user/<%=@user.id%>/foods/view" aria-label="Left Align" class="btn btn-info">
+          <a href="/user/<%=@user.id%>/foods/view" aria-label="Left Align" class="btn btn-success">
                 Edit Recent Meals
           </a>
-          <a href="/user/<%=@user.id%>/meds/view" aria-label="Left Align" class="btn btn-info">
+          <a href="/user/<%=@user.id%>/meds/view" aria-label="Left Align" class="btn btn-success">
                 Edit Recent Mecations
           </a>
-          <a href="/user/<%=@user.id%>/measurements/view" aria-label="Left Align" class="btn btn-info">
+          <a href="/user/<%=@user.id%>/measurements/view" aria-label="Left Align" class="btn btn-success">
                Edit Recent Measurements
           </a>
         </div> -->
@@ -110,7 +138,7 @@
               </div>
               <div class="row">
                 <h4 class="text-info">
-                <% if !@user.patient_foods.empty? && @user.patient_foods.select {|food|food.meal_time.nil?}.empty?%>
+                <% if @user.nutrient_counter("kcal").keys.include?(time_now_to_midnight.to_sym)%>
                 <%= kcal=@user.nutrient_counter("kcal")[time_now_to_midnight.to_sym].round(2) %> Kcal
                 <% else %>
                  <%=kcal=0%>
@@ -124,7 +152,7 @@
               </div>
               <div class="row">
               <h4 class="text-info">
-                <% if !@user.patient_foods.empty? && @user.patient_foods.select {|food|food.meal_time.nil?}.empty?%>
+                <% if @user.nutrient_counter("protein").keys.include?(time_now_to_midnight.to_sym)%>
                 <%= protein=@user.nutrient_counter("protein")[time_now_to_midnight.to_sym].round(2)  %> g
                  <% else %>
                 <%= protein=0 %>
@@ -138,7 +166,7 @@
               </div>
               <div class="row">
                 <h4 class="text-info">
-               <% if !@user.patient_foods.empty? && @user.patient_foods.select {|food|food.meal_time.nil?}.empty?%>
+               <% if @user.nutrient_counter("total_fat").keys.include?(time_now_to_midnight.to_sym)%>
                 <%= fat=@user.nutrient_counter("total_fat")[time_now_to_midnight.to_sym].round(2)  %> g
                <% else %>
                 <%= fat=0 %>
