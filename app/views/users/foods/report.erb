@@ -1,0 +1,66 @@
+<div class="jumbotron" style="margin: 0% 5%">
+<%@meals.each do |key, value|%>
+  <div class="row" style="margin-top:15%">
+    <div class="col-md-6" width="50%" height="50%">
+    <h3><%= key.to_s %></h3>
+    <h4>Total calories <%=@calories[key]%> kcal</h4>
+    <ul>
+    <%value.each do |food|%>
+      <li>
+      <h5><%=food.name%></h5>
+        <ul>
+          <li>
+            <%=food.measure%> portions
+          </li>
+        </ul>
+      </li>
+    <%end%>
+    </ul>
+    </div>
+    <div class="col-md-3" width="25%" height="25%">
+      <div class ="container">
+        <div id="grafico1" style="width:215px; height:31px;">
+          <canvas id="<%= key.to_s %>" >
+          </canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+<%end%>
+</div>
+<script>
+    
+      window.onload = function(){
+        
+        <%@meals.keys.each do |key|%>
+        var doughnutData = [
+        {
+          value: <%=@carbs[key].to_json%>,
+          label: "Carbs"
+        },
+        {
+          value: <%=@protein[key].to_json%>,
+          label: "Protein"
+        },
+        {
+          value: <%=@sugar[key].to_json%>,
+          label: "Sugar"
+        },
+        {
+          value: <%=@fiber[key].to_json%>,
+          label: "Fiber"
+        },
+        {
+          value: <%=@fat[key].to_json%>,
+          label: "Fat"
+        }
+      ];
+        var ctx = document.getElementById(<%=key.to_s.to_json%>).getContext("2d");
+        ctx.canvas.width = 50;
+        ctx.canvas.height = 50;
+        window.myDoughnut = new Chart(ctx).Doughnut(doughnutData, {responsive : true});
+        <%end%>
+      };
+  </script>
+
+  

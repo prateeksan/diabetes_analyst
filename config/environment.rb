@@ -8,7 +8,8 @@ require 'sinatra'
 require 'sinatra/activerecord'
 require 'sinatra/contrib/all' # Requires cookies, among other things
 require 'sinatra/partial'
-
+require "open-uri"
+require 'prawn'
 require 'pry'
 
 require 'bcrypt'

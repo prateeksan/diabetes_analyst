@@ -5,8 +5,7 @@ class CreatePatientMedicationsTable < ActiveRecord::Migration
       t.references :medication
       t.integer :din
       t.string :name
-      t.float :quantity
-      
+      t.float :quantity      
       t.datetime :medication_time
       t.timestamps
     end

@@ -31,3 +31,8 @@ desc 'Import food table'
 task "get_drugs" do
   require './db/import/import_drugs.rb'
 end
+
+desc 'Create fake data'
+task "populate" do
+  require './db/fake_data/fake_measurements.rb'
+end

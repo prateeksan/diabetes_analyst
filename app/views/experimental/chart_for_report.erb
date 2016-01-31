@@ -1,0 +1,12 @@
+<% image_link = Gchart.line_xy( :theme => :thirty7signals, 
+                      :title => 'Blood sugar level',
+                      :data => [[1,2,3,4,5],[10,10,20,20,30]],
+                      :axis_with_labels => ['x','y'],
+                      :size => '400x400',
+                      :axis_labels => [1,2,3,4,5],
+                      #:legend => results.keys,
+                      :encoding => 'text',
+                      :max_value => 'false'
+                     ).sub!('chds=,', 'chds=a') %>
+
+<img  src= "<%= image_link%>" alt="Blood sugar graph" style="margin-top:10%"> 

@@ -28,6 +28,13 @@ body {
   display: none;
 }
 
+
+canvas {
+  background-color: white; 
+  width: 100%;
+  height: auto;
+}
+
 #bs-example-navbar-collapse-1{
   padding-bottom: 0px;
 }
@@ -58,4 +65,5 @@ body {
   -ms-transition: opacity 0.4s ease-in-out;
   -o-transition: opacity 0.4s ease-in-out;
   transition: opacity 0.4s ease-in-out;
+
 }

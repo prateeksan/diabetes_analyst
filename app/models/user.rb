@@ -56,6 +56,7 @@ class User < ActiveRecord::Base
   end
   
 
+
   ####For now I have it in the user model but will transfer to have it as a helper
   #### Call the  User.first.nutrient_counter("total_fat") or any other nutrient described on the food table
   #### It will return a hash where the key is the day and the value is the amount of that nutrient consumed on that day
@@ -63,7 +64,7 @@ class User < ActiveRecord::Base
   def unify_meals_per_day
   user = self
   meals = {}
-  sorted_food = user.patient_foods.order(:meal_time)
+  sorted_food = user.patient_foods.order(meal_time: :desc)
   unique_days = sorted_food.select(:meal_time).uniq
   unique_days.each do |date|
     begining_day = date.meal_time.to_date.to_datetime
@@ -85,6 +86,11 @@ end
       result[day] = amount
     end
     result
+  end
+
+
+  def bmi_calculator
+    (self.patient_measurements.last.weight.to_f / self.height.to_f / self.height.to_f * 10000).floor
   end
 
 end
