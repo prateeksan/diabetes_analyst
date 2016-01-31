@@ -64,26 +64,23 @@
                     <a href="#page-top"></a>
                 </li>
                 <li class="page-scroll">
-                    <a href="/aboutus">About</a>
-                </li>
-                <li class="page-scroll">
                   <% if current_user %>
-                    <a href="/user/<%= current_user.id %>">Dashboard</a>
+                    <a href="/user/<%= current_user.id %>"><i class="fa fa-tachometer"></i> Dashboard</a>
                   <% end %>
                 </li>
                 <li class="page-scroll">
                   <% unless current_user %>
-                    <a href="/user/signin">Sign in</a>
+                    <a href="/user/signin"><i class="fa fa-sign-in"></i> Sign in</a>
                     <% end %>
                 </li>
                 <li class="page-scroll">
                   <% unless current_user %>
-                    <a href="/user/signup">Sign up</a>
+                    <a href="/user/signup"><i class="fa fa-user-plus"></i> Sign up</a>
                   <% end %>
                 </li>
                 <li class="page-scroll">
                   <% if current_user %>
-                    <a href="/user/signout">Sign Out</a>
+                    <a href="/user/signout"><i class="fa fa-sign-out"></i> Sign Out</a>
                   <% end %>
                 </li>
             </ul>
