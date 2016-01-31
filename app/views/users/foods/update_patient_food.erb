@@ -17,37 +17,44 @@
       </ul>
     </div>
   <% end %>
-  <form class="form-horizontal" method="POST" action="/user/<%=@user.id%>/foods/<%=@food.id%>">
-    <div class="form-group">
-      <label class="col-sm-2 control-label" for="food_name">Food</label>
-      <div class="col-sm-10">
-        <input id="food_name" name="name" class="form-control" placeholder="foodname">
-      </div>
+  <div class="well">
+    <div>
+      <h4>Edit this entry</h4>
     </div>
-    <div class="form-group">
-      <label class="col-sm-2 control-label">Portions</label>
-      <div class="col-sm-10">
-        <input id="food_portions" type="text" name="measure" class="form-control" placeholder="(units) per portion">
-      </div>
+    <div class="panel-body">
+      <form class="form-horizontal" method="POST" action="/user/<%=@user.id%>/foods/<%=@food.id%>">
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="food_name">Food</label>
+          <div class="col-sm-10">
+            <input id="food_name" name="name" class="form-control" placeholder="foodname">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Portions</label>
+          <div class="col-sm-10">
+            <input id="food_portions" type="text" name="measure" class="form-control" placeholder="(units) per portion">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Time</label>
+          <div class="col-sm-10">
+            <input type="datetime-local" name="meal_time" class="form-control" value = <%= (@present_date_time if defined? @present_date_time) || date_time_now_for_html %>>
+          </div>
+        </div>    
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Details</label>
+          <div class="col-sm-10">
+            <input type="text" name="description" class="form-control" placeholder="any relevant notes">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default" name="submit_food" id="submit_food" value="submit">Save and Return</button>
+          </div>
+        </div>
+      </form>
     </div>
-    <div class="form-group">
-      <label class="col-sm-2 control-label">Time</label>
-      <div class="col-sm-10">
-        <input type="datetime-local" name="meal_time" class="form-control" value = <%= (@present_date_time if defined? @present_date_time) || date_time_now_for_html %>>
-      </div>
-    </div>    
-    <div class="form-group">
-      <label class="col-sm-2 control-label">Details</label>
-      <div class="col-sm-10">
-        <input type="text" name="description" class="form-control" placeholder="any relevant notes">
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-default" name="submit_food" id="submit_food" value="submit">Save and Return</button>
-      </div>
-    </div>
-  </form>
+  </div>
 </div>
 
 <script type="text/javascript" src="/javascript/autocomplete.js"></script>
