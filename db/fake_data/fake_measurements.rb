@@ -63,7 +63,7 @@ end
 
 # Long version to be used to have a more realistic database with multiple users
 
-50.times do
+20.times do
   med = PatientMedication.new
   med.user = User.all.sample
   med.medication_id = (1..500).to_a.sample
