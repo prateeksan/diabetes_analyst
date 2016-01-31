@@ -4,7 +4,7 @@
     border: none;
     color: #AC8364;
     background: none;
-    padding: 5px 60px;
+    padding: 1% 14%;
     width: auto;
     text-align: center;
     -webkit-transition-duration: 0.4s; /* Safari */
@@ -39,61 +39,58 @@
 <div class="container jumbotron" style="margin-top:10%">
     <div class="row">
       <div class="panel-heading">
-        <h4>Welcome <strong class="text-info"><%=current_user.first_name if current_user%></strong>! Here is your daily report</h4>
+        <h3>Welcome <strong class="text-info"><%=current_user.first_name if current_user%></strong> <i class="fa fa-hand-peace-o"></i></h3>
       </div>
     </div>
     <div class= "well">
     <div class="row" style="margin:3% 1%; text-align:center">
       <div class="col-md-4">
         <div class="row" style="margin-top:3% 1%; text-align:center">
-          <div class="col-md-12 well" style="margin-right: 1%; height: 450px">
+          <div class="col-md-12 well" style="margin-right: 1%; margin-bottom: 5%; height: 450px">
 <!--             <div class="row">
               <h5>Menu</h5>
             </div> -->
             <div class="row">
               <div class="btn-group-vertical" role="group" aria-label="..." style="margin-top:1%">
                 <a href="/user/<%=@user.id%>/edit" aria-label="Left Align" class="btn btn-success">
-                    Update Profile
+                  <i class="fa fa-user"></i> Update Profile
                 </a>
+                <hr/>
                 <a href="/user/<%= @user.id %>/foods/new" aria-label="Left Align" class="btn btn-success">
-                  New Meal
+                  <i class="fa fa-cutlery"></i> New Meal
                 </a>
                 <a href="/user/<%=@user.id%>/meds/new " aria-label="Left Align" class="btn btn-success">
-                  New Medication
+                  <i class="fa fa-medkit"></i> New Medication
                 </a>  
                 <a href="/user/<%=@user.id%>/measurements/new" aria-label="Left Align" class="btn btn-success">
-                  New Measurement
+                  <i class="fa fa-heartbeat"></i> New Measurement
                 </a>
-                <a href="/user/<%=@user.id%>/measurements/graphs " aria-label="Left Align" class="btn btn-success">
-                Measurement Report
-                </a>
-                <a href="/user/<%=@user.id%>/foods/report " aria-label="Left Align" class="btn btn-success">
-                Daily Meal Report 
-                </a>
-                <a href="/user/<%=@user.id%>/measurements/graphs " aria-label="Left Align" class="btn btn-success">
-                  Measurement Report
-                </a>
-                <a href="/user/<%=@user.id%>/foods/report " aria-label="Left Align" class="btn btn-success">
-                  Daily Meal Report 
-                </a>
+                <hr/>
                 <a href="/user/<%=@user.id%>/foods/view" aria-label="Left Align" class="btn btn-success">
-                  Edit Recent Meals
+                  <i class="fa fa-cutlery"></i> Edit Recent Meals
                 </a>
                 <a href="/user/<%=@user.id%>/meds/view" aria-label="Left Align" class="btn btn-success">
-                  Edit Recent Mecations
+                  <i class="fa fa-medkit"></i> Edit Recent Medications
                 </a>
                 <a href="/user/<%=@user.id%>/measurements/view" aria-label="Left Align" class="btn btn-success">
-                  Edit Recent Measurements
+                  <i class="fa fa-heartbeat"></i> Edit Recent Measurements
+                </a>
+                <hr/>
+                <a href="/user/<%=@user.id%>/measurements/graphs " aria-label="Left Align" class="btn btn-success">
+                  <i class="fa fa-line-chart"></i> Measurement Report
+                </a>
+                <a href="/user/<%=@user.id%>/foods/report " aria-label="Left Align" class="btn btn-success">
+                  <i class="fa fa-pie-chart"></i> Daily Meal Report 
                 </a>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="row" style="margin-top:3% 1%; text-align:center">
-          <div class="col-md-12 well" style="margin: 1%; height: 150px">
+        <div class="row" style="margin-top: 0; text-align:center">
+          <div class="col-md-12 well" style="margin: 1% 0; height: 150px">
             <div class="row">
-              <h5>Recommended limit fat intake /day:</h5>
+              <h5>Recommended limit fat intake per day</h5>
             </div>
             <div class="row">
               <% if @user.patient_measurements.last %>   
@@ -134,7 +131,7 @@
           <div class="row" style="margin:0 1%; text-align:center">
             <div class="col-md-6 well" style= "height: 130px">
               <div class="row">
-                <h5>Today's total calorie intake:</h5>
+                <h5>Today's total calorie intake</h5>
               </div>
               <div class="row">
                 <h4 class="text-info">
@@ -148,7 +145,7 @@
             </div>
             <div class="col-md-6 well" style="height: 130px">
               <div class="row">
-                <h5>Today's total protein intake:</h5>
+                <h5>Today's total protein intake</h5>
               </div>
               <div class="row">
               <h4 class="text-info">
@@ -162,7 +159,7 @@
             </div>
             <div class="col-md-6 well" style="height: 130px">
               <div class="row">
-                <h5>Today's total fat intake:</h5>
+                <h5>Today's total fat intake</h5>
               </div>
               <div class="row">
                 <h4 class="text-info">
@@ -176,7 +173,7 @@
             </div>
             <div class="col-md-6 well" style="height: 130px">
               <div class="row">
-                <h5><super>*</super>Current BMI(Body Mass Index):</h5>
+                <h5>Current BMI (Body Mass Index)</h5>
               </div>
               <div class="row">
                 <h4 class="text-info"><%= bmi_calculator(@user) %></h4>
@@ -186,7 +183,7 @@
         <div class="row" style="margin:0 1%; text-align:center">
           <div class="col-md-12 well" style="margin-right: 1%; height: 150px; padding: 4%">
             <div class="row">
-              <h5>Recommended calorie intake around 30 kcal per Kg of Current Weight /day:</h5>
+              <h5>Recommended calorie intake per day</h5>
             </div>
             <div class="row">
             <% if @user.patient_measurements.last %>
@@ -205,7 +202,7 @@
           </div>
           <div class="col-md-12 well" style="margin-right: 1%; height: 150px; padding: 4%">
             <div class="row">
-              <h5>Recommended protein intake /day:</h5>
+              <h5>Recommended protein intake per day</h5>
             </div>
             <div class="row">
             <% if @user.patient_measurements.last %>   
