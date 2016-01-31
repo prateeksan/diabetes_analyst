@@ -77,7 +77,7 @@
             <div class="row">
               <h4 class="text-info">
               <% if !@user.patient_foods.empty? && @user.patient_foods.select {|food|food.meal_time.nil?}.empty?%>
-              <%= kcal=@user.nutrient_counter("kcal")[time_now_to_midnight.to_sym] %> Kcal
+              <%= kcal=@user.nutrient_counter("kcal")[time_now_to_midnight.to_sym].round(2) %> Kcal
               <% else %>
                <%=kcal=0%>
               <% end %>
@@ -91,7 +91,7 @@
             <div class="row">
             <h4 class="text-info">
               <% if !@user.patient_foods.empty? && @user.patient_foods.select {|food|food.meal_time.nil?}.empty?%>
-              <%= protein=@user.nutrient_counter("protein")[time_now_to_midnight.to_sym]  %> g
+              <%= protein=@user.nutrient_counter("protein")[time_now_to_midnight.to_sym].round(2)  %> g
                <% else %>
               <%= protein=0 %>
               <% end %>
@@ -105,7 +105,7 @@
             <div class="row">
               <h4 class="text-info">
              <% if !@user.patient_foods.empty? && @user.patient_foods.select {|food|food.meal_time.nil?}.empty?%>
-              <%= fat=@user.nutrient_counter("total_fat")[time_now_to_midnight.to_sym]  %> g
+              <%= fat=@user.nutrient_counter("total_fat")[time_now_to_midnight.to_sym].round(2)  %> g
              <% else %>
               <%= fat=0 %>
               <% end %>
@@ -122,7 +122,7 @@
           </div>
         </div>
       <div class="row" style="margin-top:5%">
-        <div class="col-md-4" style="border:5px double brown;padding:3%">
+        <div class="col-md-4" style="border:5p  x double brown;padding:3%">
           <div class="row">
             <h5>Recommended calorie intake around 30 kcal per Kg of Current Weight /day:</h5>
           </div>

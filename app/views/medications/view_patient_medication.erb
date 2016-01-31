@@ -33,21 +33,21 @@
 }
 </style>  
 
-<div class="container" style="margin-top: 10%">
+<div class="container jumbotron" style="margin-top: 10%">
     <% i=0 %>
     <% 10.times do %>
     <% if filter_n_day(i,@medications_arr).empty? %>
-    <div class="container" style="border:2px solid blue;">
+    <div class="container well">
       <% if i != 0 %>
-        <h4><strong><%=i%> days ago: No Data Entry </strong></h4>
+        <h5><strong><%=i%> days ago: No Data Entry </strong></h5>
       <% else %>
-        <h4><strong>Today: No Data Entry </strong></h4>
+        <h5><strong>Today: No Data Entry </strong></h5>
       <% end %>
     <% else %>
-    <div class="container" style="border:2px solid blue;">
+    <div class="container well">
     <% end %>    
     <% filter_n_day(i,@medications_arr).each do |medication|%>
-        <div class="panel-default" style="margin-top:2%">
+        <div class="panel" style="margin-top:1%">
           <div class="panel-heading">
             <div class="row">
               <div class="col-md-8">
@@ -59,15 +59,15 @@
               </div>  
             </div>
           </div>
-          <div class="panel-body"> 
+          <div style ="padding: 0 0 2% 10%"> 
             <div class="row">
-              Name: <%= medication.name %>
+              <i class="fa fa-plus-square"></i> Name: <%= medication.name %>
             </div>
             <div class="row">
-              Quantity: <%= medication.quantity %>
+              <i class="fa fa-medkit"></i> Quantity: <%= medication.quantity %>
             </div>
             <div class="row">
-              Taken at: <%= medication.medication_time.to_s[0..18] %>
+              <i class="fa fa-clock-o"></i> Taken at: <%= medication.medication_time.to_s[0..18] %>
             </div>
           </div>
         </div>
