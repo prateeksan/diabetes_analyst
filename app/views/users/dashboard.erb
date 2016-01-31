@@ -57,6 +57,13 @@
           New Measurement
         </a>
         <br/>
+        <a href="/user/<%=@user.id%>/measurements/graphs " aria-label="Left Align" class="btn btn-success">
+        Measurement Report
+        </a>
+        <a href="/user/<%=@user.id%>/foods/report " aria-label="Left Align" class="btn btn-success">
+        Daily Meal Report 
+        </a>
+        <br/>
         <a href="/user/<%=@user.id%>/foods/view" aria-label="Left Align" class="btn btn-info">
               Edit Recent Meals
         </a>
@@ -122,7 +129,7 @@
           </div>
         </div>
       <div class="row" style="margin-top:5%">
-        <div class="col-md-4" style="border:5p  x double brown;padding:3%">
+        <div class="col-md-4" style="border:5px double brown;padding:3%">
           <div class="row">
             <h5>Recommended calorie intake around 30 kcal per Kg of Current Weight /day:</h5>
           </div>
