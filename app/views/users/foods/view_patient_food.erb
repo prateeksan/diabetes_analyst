@@ -61,16 +61,16 @@
           </div>
           <div style ="padding: 0 0 2% 10%"> 
             <div class="row">
-              Name: <%= food.name %>
+              <i class="fa fa-cutlery"></i> Name: <%= food.name %>
             </div>
             <div class="row">
-              Measure: <%= food.measure %>
+              <i class="fa fa-balance-scale"></i> Portions: <%= food.measure %>
             </div>
             <div class="row">
-              Description: <%= food.description %>
+              <i class="fa fa-sticky-note-o"></i> Description: <%= food.description %>
             </div>
             <div class="row">
-              Meal Time: <%= food.meal_time.to_s[0..18] %>
+              <i class="fa fa-clock-o"></i> Meal Time: <%= food.meal_time.to_s[0..18] %>
             </div>
           </div>
         </div>

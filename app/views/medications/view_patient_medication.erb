@@ -61,13 +61,13 @@
           </div>
           <div style ="padding: 0 0 2% 10%"> 
             <div class="row">
-              Name: <%= medication.name %>
+              <i class="fa fa-plus-square"></i> Name: <%= medication.name %>
             </div>
             <div class="row">
-              Quantity: <%= medication.quantity %>
+              <i class="fa fa-medkit"></i> Quantity: <%= medication.quantity %>
             </div>
             <div class="row">
-              Taken at: <%= medication.medication_time.to_s[0..18] %>
+              <i class="fa fa-clock-o"></i> Taken at: <%= medication.medication_time.to_s[0..18] %>
             </div>
           </div>
         </div>
