@@ -1,15 +1,32 @@
-<%@meals.keys.each do |key|%>
-  <div class="row" >
-  <div class ="container">
-    <div id="grafico1" style="width:433px; height:62px;">
-    <h1><%= key.to_s %></h1>
-      <canvas id=<%= key.to_s %> width="500" height="500"/>
-      </canvas>
+<div class="jumbotron" style="margin: 0% 5%">
+<%@meals.each do |key, value|%>
+  <div class="row" style="margin-top:15% ; border: 2px solid black">
+    <div class="col-md-6" width="50%" height="50%">
+    <h3><%= key.to_s %></h3>
+    <ul>
+    <%value.each do |food|%>
+      <li>
+      <h4><%=food.name%></h4>
+        <ul>
+          <li>
+            <%=food.measure%> portions
+          </li>
+        </ul>
+      </li>
+    <%end%>
+    </ul>
+    </div>
+    <div class="col-md-3" width="25%" height="25%">
+      <div class ="container">
+        <div id="grafico1" style="width:215px; height:31px;">
+          <canvas id="<%= key.to_s %>" >
+          </canvas>
+        </div>
       </div>
     </div>
   </div>
 <%end%>
-
+</div>
 <script>
     
       window.onload = function(){
@@ -38,6 +55,8 @@
         }
       ];
         var ctx = document.getElementById(<%=key.to_s.to_json%>).getContext("2d");
+        ctx.canvas.width = 50;
+        ctx.canvas.height = 50;
         window.myDoughnut = new Chart(ctx).Doughnut(doughnutData, {responsive : true});
         <%end%>
       };

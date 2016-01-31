@@ -64,16 +64,22 @@
 
   window.onload = function(){
     var ctx0 = document.getElementById("blood_sugar").getContext("2d");
+    ctx0.canvas.width = 200;
+    ctx0.canvas.height = 200;
     window.myLine = new Chart(ctx0).Line(sugarChartData, {
       responsive: true
     });
 
     var ctx1= document.getElementById("weight").getContext("2d");
+    ctx1.canvas.width = 200;
+    ctx1.canvas.height = 200;
     window.myLine = new Chart(ctx1).Line(weightChartData, {
       responsive: true
     });
 
     var ctx2= document.getElementById("blood_pressure").getContext("2d");
+    ctx2.canvas.width = 200;
+    ctx2.canvas.height = 200;
     window.myLine = new Chart(ctx2).Line(pressureChartData, {
       responsive: true
     });
@@ -83,22 +89,48 @@
   </script>
 
 
-<div class="row" style="width: 50% margin-top:10%">
-      <div class ="container">
-      <canvas id="blood_pressure" ></canvas>
+
+
+   
+<div class="jumbotron" style="margin: 10% 5%">
+  <div class="row"> 
+    <div class="col-md-3" width="50%" height="50%">
     </div>
+    <div class="col-md-6" width="50%" height="50%">
+        <div class ="container">
+          <h4>Blood sugar level</h4>
+          <canvas id="blood_sugar"></canvas>
+        </div>
+    </div>
+    <div class="col-md-6" width="50%" height="50%">
+    </div>
+  </div>
+  <div class="row"> 
+    <div class="col-md-3" width="50%" height="50%">
+    </div>
+    <div class="col-md-6" width="50%" height="50%"> 
+        <div class ="container">
+          <br>
+          <br>
+          <h4>Blood pressure</h4>
+          <canvas id="blood_pressure" ></canvas>
+        </div>
+    </div>
+    <div class="col-md-6" width="50%" height="50%">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3" width="50%" height="50%">
+    </div> 
+    <div class="col-md-6" width="50%" height="50%"> 
+        <div class ="container">
+          <br>
+          <br>          
+          <h4>Weight</h4>
+          <canvas id="weight" ></canvas>
+        </div>
+    </div>
+    <div class="col-md-6" width="50%" height="50%">
+    </div>
+  </div>
 </div>
-
-   <div class="row" style="width: 50% margin-top:50%">
-      <div class ="container">
-      <canvas id="weight"></canvas>
-    </div>
-    </div>
-
-
- <div class="row" style="width: 50% margin-top:70%">
-      <div class ="container">
-      <canvas id="blood_sugar"></canvas>
-    </div>
-    </div>
-

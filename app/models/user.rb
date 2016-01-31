@@ -64,7 +64,7 @@ class User < ActiveRecord::Base
   def unify_meals_per_day
   user = self
   meals = {}
-  sorted_food = user.patient_foods.order(:meal_time )
+  sorted_food = user.patient_foods.order(meal_time: :desc)
   unique_days = sorted_food.select(:meal_time).uniq
   unique_days.each do |date|
     begining_day = date.meal_time.to_date.to_datetime

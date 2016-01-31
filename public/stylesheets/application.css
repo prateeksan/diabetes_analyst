@@ -16,3 +16,9 @@
 .ui-helper-hidden-accessible {
   display: none;
 }
+
+canvas {
+  background-color: white; 
+  width: 100%;
+  height: auto;
+}
