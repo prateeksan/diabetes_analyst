@@ -47,7 +47,7 @@
     <div class="container well">
     <% end %>    
       <% filter_n_day(i,@measurements_arr).each do |measurement|%>
-        <div class="container" style="margin-top:1%">
+        <div class="panel" style="margin-top:1%">
           <div class="panel-heading">
             <div class="row">
               <div class="col-md-8">
@@ -73,8 +73,7 @@
               <i class="fa fa-balance-scale"></i> Weight: <%= measurement.weight %>
             </div>
             <div class="row">
-              <i class="fa fa-clock-o"></i>
- Measurement Time: <%= measurement.measurement_time.to_s[0..18] %>
+              <i class="fa fa-clock-o"></i> Measurement Time: <%= measurement.measurement_time.to_s[0..18] %>
             </div>
           </div>
         </div>

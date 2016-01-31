@@ -33,21 +33,21 @@
 }
 </style>  
 
-
-<div class="container" style="margin-top: 10%">
+<div class="container jumbotron" style="margin-top: 10%">
     <% i=0 %>
     <% 10.times do %> 
     <% if filter_n_day(i,@foods_arr).empty? %>
-    <div class="container" style="border:2px solid blue;">
-      <% if i != 0 %>
-        <h4><strong><%=i%> days ago: No Data Entry </strong></h4>
-      <% else %>
-        <h4><strong>Today: No Data Entry </strong></h4>
-      <% end %>    <% else %>
-    <div class="container" style="border:2px solid blue;">
-    <% end %>      
+  <div class="container well">
+    <% if i != 0 %>
+      <h5><strong><%=i%> days ago: No Data Entry </strong></h5>
+    <% else %>
+      <h5><strong>Today: No Data Entry </strong></h5>
+    <% end %>
+  <% else %>
+    <div class="container well">
+    <% end %>  
     <% filter_n_day(i,@foods_arr).each do |food|%>
-        <div class="panel-default" style="margin-top:2%">
+        <div class="panel" style="margin-top:1%">
           <div class="panel-heading">
             <div class="row">
               <div class="col-md-8">
@@ -59,7 +59,7 @@
               </div>  
             </div>
           </div>
-          <div class="panel-body"> 
+          <div style ="padding: 0 0 2% 10%"> 
             <div class="row">
               Name: <%= food.name %>
             </div>
@@ -73,11 +73,13 @@
               Meal Time: <%= food.meal_time.to_s[0..18] %>
             </div>
           </div>
-          <% end %>
-       <%  i += 1 %>
+        </div>
+        <% end %>
+        <%  i += 1 %>
       </div>
     <% end %>
   </div>
 </div>
+
   
 
