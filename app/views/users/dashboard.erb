@@ -31,7 +31,7 @@
     padding: 0;
     margin: 0;
     opacity: 1;
-    transition: 0s
+    transition: 0s  
 }
 </style>
 <div class="container">
@@ -42,50 +42,6 @@
   </div>
   <div class="row">
     <div class="col-md-3">
-<<<<<<< HEAD
-
-    </div>
-    <div class="col-md-3">
-    12mg  
-    </div>
-    <div class="col-md-3">
-    24kg
-    </div>
-    <div class="col-md-3">
-  
-
-    </div>
-  </div>
-    <div class="row">
-    <div class="col-md-3">
-    Average calorie/day:
-    </div>
-    <div class="col-md-3">
-    Average protein/day:
-    </div>
-    <div class="col-md-3">
-    Average fat/day:
-    </div>
-    <div class="col-md-3">
-    
-    </div>
-  </div>
-    <div class="row">
-    <div class="col-md-3">
-    12
-    </div>
-    <div class="col-md-3">
-    23
-    </div>
-    <div class="col-md-3">
-    12
-    </div>
-    <div class="col-md-3">
-      <a href="/user/<%=@user.id%>/edit" aria-label="Left Align" class="btn btn-primary">
-            Update Profile
-          </a>
-=======
->>>>>>> origin/master
       <div class="btn-group-vertical" role="group" aria-label="..." style="margin-top:10%">
         <a href="/user/<%=@user.id%>/edit" aria-label="Left Align" class="btn btn-primary">
             Update Profile
@@ -120,8 +76,8 @@
             </div>
             <div class="row">
               <h4 class="text-info">
-              <% unless @user.patient_foods.select {|food|food.meal_time.nil?}.empty?%>
-              <%= kcal=@user.nutrient_counter("kcal")[time_now_to_midnight.to_sym] %> Kcal
+              <% if !@user.patient_foods.empty? && @user.patient_foods.select {|food|food.meal_time.nil?}.empty?%>
+              <%= kcal=@user.nutrient_counter_history("kcal")[time_now_to_midnight.to_sym] %> Kcal
               <% else %>
                <%=kcal=0%>
               <% end %>
@@ -134,8 +90,8 @@
             </div>
             <div class="row">
             <h4 class="text-info">
-              <% unless @user.patient_foods.select {|food|food.meal_time.nil?}.empty?%>
-              <%= protein=@user.nutrient_counter("protein")[time_now_to_midnight.to_sym]  %> g
+              <% if !@user.patient_foods.empty? && @user.patient_foods.select {|food|food.meal_time.nil?}.empty?%>
+              <%= protein=@user.nutrient_counter_history("protein")[time_now_to_midnight.to_sym]  %> g
                <% else %>
               <%= protein=0 %>
               <% end %>
@@ -148,8 +104,8 @@
             </div>
             <div class="row">
               <h4 class="text-info">
-             <% unless @user.patient_foods.select {|food|food.meal_time.nil?}.empty?%>
-              <%= fat=@user.nutrient_counter("total_fat")[time_now_to_midnight.to_sym]  %> g
+             <% if !@user.patient_foods.empty? && @user.patient_foods.select {|food|food.meal_time.nil?}.empty?%>
+              <%= fat=@user.nutrient_counter_history("total_fat")[time_now_to_midnight.to_sym]  %> g
              <% else %>
               <%= fat=0 %>
               <% end %>

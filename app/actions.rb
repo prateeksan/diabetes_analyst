@@ -402,3 +402,41 @@ get '/user/:id/foods/report' do
   erb :'/users/foods/report'
 end
 
+
+# get '/report' do
+# content_type 'application/pdf'
+
+# pdf = Prawn::Document.new
+# current_user.nutrient_counter_history("carbohydrate").each do |date,value|
+# pdf.text  "On #{date} consumed #{value} carbs"
+# end
+# pdf.render
+
+# end
+
+get '/report' do
+  image_link = Gchart.line_xy( :theme => :thirty7signals, 
+                      :title => 'Blood sugar level',
+                      :data => [[1,2,3,4,5],[10,10,20,20,30]],
+                      :axis_with_labels => ['days','blood sugar level'],
+                      :size => '400x400',
+                      :axis_labels => [1,2,3,4,5],
+                      #:legend => results.keys,
+                      :encoding => 'text',
+                      :max_value => 'false'
+                     ).sub!('chds=,', 'chds=a')
+
+
+
+
+# pdf = Prawn::Document.new
+# pdf.image open([image_link,"pnj"].join("."))
+# #pdf.image open("https://upload.wikimedia.org/wikipedia/en/7/7e/PGN_logo.jpg")
+# pdf.render
+ binding.pry
+ Prawn::Document.generate("remote_images.pdf") do 
+    image open(image_link)
+      end
+# Prawn::Document.render_file "remote_images.pdf"
+end
+

@@ -93,3 +93,5 @@ end
   def bmi_calculator
     (self.patient_measurements.last.weight.to_f / self.height.to_f / self.height.to_f * 10000).floor
   end
+
+end

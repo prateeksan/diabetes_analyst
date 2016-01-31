@@ -8,7 +8,7 @@ gem 'sinatra'
 gem 'sinatra-contrib'
 gem 'sinatra-activerecord'
 gem 'sinatra-partial'
-
+gem 'prawn'
 gem 'puma'
 gem 'tux'
 gem 'googlecharts'
