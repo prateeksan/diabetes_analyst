@@ -17,7 +17,7 @@
       </ul>
     </div>
   <% end %>
-  <form class="form-horizontal" method="POST" action="/user/<%=session[:user_id]%>/foods">
+  <form class="form-horizontal" method="POST" action="/user/<%=@user.id%>/foods/<%=@food.id%>">
     <div class="form-group">
       <label class="col-sm-2 control-label" for="food_name">Food</label>
       <div class="col-sm-10">
