@@ -28,6 +28,15 @@ helpers do
     html_time = "#{ruby_time[0..9]}T#{ruby_time[11..15]}"
   end
 
+  def time_now_to_midnight
+    ruby_time = (Time.now - 18000).to_s
+    ruby_time[0..9]
+  end
+
+  def utc_to_local(time)
+    (time-18000).to_s[0..18]
+  end
+
 end
 
 # Homepage (Root path)
@@ -122,10 +131,11 @@ post '/user/signin' do
 end
 
 get '/user/:id' do
-  if @user = current_user
-    @user_bmi = bmi_calculator(@user)
+    @user = current_user
+  if @user && params[:id].to_i == @user.id
     erb :'/users/dashboard'
   else
+    session[:user_id] = nil
     redirect '/user/signin'
   end
 end
@@ -267,48 +277,52 @@ end
 
 post '/user/:id/foods/:food_id' do
   @user = current_user
+  @db_food = Food.find_by(name: params[:name])
   @food = @user.patient_foods.find(params[:food_id])
   if (@food.update(
-    name: @food.name,
+    name: @db_food.name,
     user_id: current_user.id,
-    food_id: @food.id,
+    food_id: @db_food.id,
     measure: params[:measure],
     meal_time: params[:meal_time],
     description: params[:description]
     ))  
-  redirect "/user/#{params[:id]}/measurements/view"
+  redirect "/user/#{params[:id]}/foods/view"
   else
-    erb :"/measurements/update_patient_measurement"
+    erb :"/users/foods/update_patient_food"
   end
 end
-################
+##############################
 get '/user/:id/meds/view' do
   @user = current_user
   @medications_arr = @user.patient_medications.order("created_at DESC")
   erb :'/medications/view_patient_medication'
 end
 
-# get '/user/:id/measurements/:measure_id/update' do
-#   @user = current_user
-#   @measurement = @user.patient_measurements.find(params[:measure_id])
-#   erb :'/measurements/update_patient_measurement'
-# end
+get '/user/:id/meds/:med_id/update' do
+  @user = current_user
+  @medication = @user.patient_medications.find(params[:med_id])
+  erb :'/medications/update_patient_medication'
+end
 
-# post '/user/:id/measurements/:measure_id' do
-#   @user = current_user
-#   @measurement = @user.patient_measurements.find(params[:measure_id])
-#   if (@measurement.update(
-#     blood_sugar_level: params[:blood_sugar_level],
-#     systolic_pressure: params[:systolic_pressure],
-#     diastolic_pressure: params[:diastolic_pressure],
-#     weight: params[:weight],
-#     measurement_time: params[:measurement_time]
-#     ))
-#   redirect "/user/#{params[:id]}/measurements/view"
-#   else
-#     erb :"/measurements/update_patient_measurement"
-#   end
-# end
+post '/user/:id/meds/:med_id' do
+  @user = current_user
+  @db_medication = Medication.find_by(name: params[:name])
+  @medication = @user.patient_medications.find(params[:med_id])
+  if (@medication.update(
+    name: @db_medication.name,
+    user_id: current_user.id,
+    medication_id: @db_medication.id,
+    quantity: params[:quantity],
+    din: params[:din],
+    medication_time: params[:medication_time]
+    ))
+  redirect "/user/#{params[:id]}/meds/view"
+  else
+    binding.pry
+    erb :"/medications/update_patient_medication"
+  end
+end
 ##########################
 
 post '/user/signup' do

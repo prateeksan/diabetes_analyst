@@ -6,6 +6,7 @@ class PatientFood < ActiveRecord::Base
 
 
   validates :name, :measure, :meal_time, presence: true
+  validates :measure, numericality: {greater_than: 0}
 
 
 end

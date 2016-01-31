@@ -1,8 +1,7 @@
 class User < ActiveRecord::Base
   
   has_secure_password
-
-  has_many :patient_measurements
+  has_many :patient_measurements 
   has_many :patient_foods
   has_many :patient_medications
 
@@ -57,6 +56,7 @@ class User < ActiveRecord::Base
   end
   
 
+
   ####For now I have it in the user model but will transfer to have it as a helper
   #### Call the  User.first.nutrient_counter("total_fat") or any other nutrient described on the food table
   #### It will return a hash where the key is the day and the value is the amount of that nutrient consumed on that day
@@ -90,13 +90,6 @@ end
   end
 
 
-  def nutrient_counter_day(nutrient)
-
-  end
-
   def bmi_calculator
     (self.patient_measurements.last.weight.to_f / self.height.to_f / self.height.to_f * 10000).floor
   end
-
-
-end
