@@ -75,14 +75,13 @@ class User < ActiveRecord::Base
 end
 
 
-  def nutrient_counter_history(nutrient)
+  def nutrient_counter(nutrient)
     meals = self.unify_meals_per_day
     result = {}
     meals.each do |day, foods|
       amount = 0
       foods.each do |food_item|
         amount += Food.find(food_item.food_id)[nutrient.to_sym] * food_item.measure
-        #binding.pry
       end
       result[day] = amount
     end

@@ -3,10 +3,11 @@
   <div class="row" style="margin-top:15%">
     <div class="col-md-6" width="50%" height="50%">
     <h3><%= key.to_s %></h3>
+    <h4>Total calories <%=@calories[key]%> kcal</h4>
     <ul>
     <%value.each do |food|%>
       <li>
-      <h4><%=food.name%></h4>
+      <h5><%=food.name%></h5>
         <ul>
           <li>
             <%=food.measure%> portions

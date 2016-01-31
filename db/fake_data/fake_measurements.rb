@@ -63,7 +63,7 @@ end
 
 # Long version to be used to have a more realistic database with multiple users
 
-100.times do
+50.times do
   med = PatientMedication.new
   med.user = User.all.sample
   med.medication_id = (1..500).to_a.sample
@@ -84,7 +84,7 @@ end
     meal.meal_time = time_fake
     meal.measure = (1..3).to_a.sample
     meal.save
-    meal.created_at = Faker::Date.between(10.days.ago, Date.today) 
+    meal.created_at = Faker::Date.between(5.days.ago, Date.today) 
     meal.save
   end
 

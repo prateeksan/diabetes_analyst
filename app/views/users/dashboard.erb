@@ -57,6 +57,13 @@
           New Measurement
         </a>
         <br/>
+        <a href="/user/<%=@user.id%>/measurements/graphs " aria-label="Left Align" class="btn btn-success">
+        Measurement Report
+        </a>
+        <a href="/user/<%=@user.id%>/foods/report " aria-label="Left Align" class="btn btn-success">
+        Daily Meal Report 
+        </a>
+        <br/>
         <a href="/user/<%=@user.id%>/foods/view" aria-label="Left Align" class="btn btn-info">
               Edit Recent Meals
         </a>
@@ -76,8 +83,8 @@
             </div>
             <div class="row">
               <h4 class="text-info">
-              <% if !@user.patient_foods.empty? && @user.patient_foods.select {|food|food.meal_time.nil?}.empty?%>
-              <%= kcal=@user.nutrient_counter_history("kcal")[time_now_to_midnight.to_sym] %> Kcal
+              <% if @user.nutrient_counter("kcal").keys.include?(time_now_to_midnight.to_sym)%>
+              <%= kcal=@user.nutrient_counter("kcal")[time_now_to_midnight.to_sym].round(2) %> Kcal
               <% else %>
                <%=kcal=0%>
               <% end %>
@@ -90,8 +97,8 @@
             </div>
             <div class="row">
             <h4 class="text-info">
-              <% if !@user.patient_foods.empty? && @user.patient_foods.select {|food|food.meal_time.nil?}.empty?%>
-              <%= protein=@user.nutrient_counter_history("protein")[time_now_to_midnight.to_sym]  %> g
+              <% if  @user.nutrient_counter("protein").keys.include?(time_now_to_midnight.to_sym)%>
+              <%= protein=@user.nutrient_counter("protein")[time_now_to_midnight.to_sym].round(2)  %> g
                <% else %>
               <%= protein=0 %>
               <% end %>
@@ -104,8 +111,8 @@
             </div>
             <div class="row">
               <h4 class="text-info">
-             <% if !@user.patient_foods.empty? && @user.patient_foods.select {|food|food.meal_time.nil?}.empty?%>
-              <%= fat=@user.nutrient_counter_history("total_fat")[time_now_to_midnight.to_sym]  %> g
+             <% if  @user.nutrient_counter("total_fat").keys.include?(time_now_to_midnight.to_sym)%>
+              <%= fat=@user.nutrient_counter("total_fat")[time_now_to_midnight.to_sym].round(2)  %> g
              <% else %>
               <%= fat=0 %>
               <% end %>
