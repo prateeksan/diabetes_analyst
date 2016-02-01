@@ -187,7 +187,7 @@
             </div>
             <div class="row">
             <% if @user.patient_measurements.last %>
-              <h4 class="text-info"><%= kcal_t=@user.patient_measurements.last.weight * 30 %> Kcal</h4>
+              <h4 class="text-info"><%= kcal_t=(@user.patient_measurements.last.weight * 30).round(2) %> Kcal</h4>
             <% else %>
               <% kcal_t = 1 %>
               <h4 class="text-info"> Enter a measurement first </h4>
@@ -206,7 +206,7 @@
             </div>
             <div class="row">
             <% if @user.patient_measurements.last %>   
-              <h4 class="text-info"><%= protein_t=@user.patient_measurements.last.weight * 0.9%> g</h4>
+              <h4 class="text-info"><%= protein_t=(@user.patient_measurements.last.weight * 0.9).round(2)%> g</h4>
             <% else %>
               <% protein_t=1 %>
               <h4 class="text-info"> Enter a measurement first </h4>

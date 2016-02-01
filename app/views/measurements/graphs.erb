@@ -92,18 +92,31 @@
 
 
    
-<div class="jumbotron" style="margin: 10% 5%">
-  <div class="row"> 
-    <div class="col-md-3" width="50%" height="50%">
-    </div>
-    <div class="col-md-6" width="50%" height="50%">
-        <div class ="container">
-          <h4>Blood sugar level</h4>
-          <canvas id="blood_sugar"></canvas>
+<div class="jumbotron" style="margin: 10% 5%; background-color: transparent;">
+  <div class="row">
+      <div class="col-md-12">
+        <div class = "container well" height="100%">
+          <div class="col-md-4">
+            <canvas id="blood_sugar" style="border: 1px solid black"></canvas>
+          </div>
+          <div class="col-md-8">
+            <div class = "container well">
+              <div class="panel panel-default">
+                <h4 class="panel-heading">Blood sugar level</h4>
+                <div class="panel-body">
+                  <% if current_user %>
+                    <ul class="list-group">
+                      <li class="list-group-item">Average Blood Sugar Level: <%= current_user.patient_measurements.average(:blood_sugar_level).to_f.round(2) %></li>
+                      <li class="list-group-item">Highest Blood Sugar Recording: <%= current_user.patient_measurements.maximum(:blood_sugar_level).to_f.round(2)%></li>
+                      <li class="list-group-item">Lowest Blood Sugar Recording: <%= current_user.patient_measurements.maximum(:blood_sugar_level).to_f.round(2)%></li>
+                    </ul>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
-    <div class="col-md-6" width="50%" height="50%">
-    </div>
+      </div>
   </div>
   <div class="row"> 
     <div class="col-md-3" width="50%" height="50%">

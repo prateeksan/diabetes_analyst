@@ -1,27 +1,33 @@
-<div class="jumbotron" style="margin: 0% 5%">
+<div class="jumbotron container" style="margin: 10%">
 <%@meals.each do |key, value|%>
-  <div class="row" style="margin-top:15%">
-    <div class="col-md-6" width="50%" height="50%">
-    <h3><%= key.to_s %></h3>
-    <h4>Total calories <%=@calories[key]%> kcal</h4>
-    <ul>
-    <%value.each do |food|%>
-      <li>
-      <h5><%=food.name%></h5>
-        <ul>
-          <li>
-            <%=food.measure%> portions
-          </li>
-        </ul>
-      </li>
-    <%end%>
-    </ul>
-    </div>
-    <div class="col-md-3" width="25%" height="25%">
-      <div class ="container">
-        <div id="grafico1" style="width:215px; height:31px;">
-          <canvas id="<%= key.to_s %>" >
-          </canvas>
+  <div class ="well">
+    <div class="row" style="margin-top:1%">
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4><i class="fa fa-calendar"></i> <%= key.to_s %></h4>
+          </div>
+          <div class="panel-body">
+            <h4>Total calories <%=@calories[key]%> kcal</h4>
+            <ul class="text-info list-group">
+            <%value.each do |food|%>
+              <li class="list-group-item">
+                <%=food.name%>
+                <span class="badge"><%=food.measure%> portions</span>
+              </li>
+            <%end%>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-3">
+        <div class ="well">
+          <div id="grafico1">
+            <canvas id="<%= key.to_s %>" style = "width: 100%; height: auto; background-color: transparent">
+            </canvas>
+          </div>
         </div>
       </div>
     </div>
@@ -35,23 +41,23 @@
         <%@meals.keys.each do |key|%>
         var doughnutData = [
         {
-          value: <%=@carbs[key].to_json%>,
+          value: <%=@carbs[key].round(2).to_json%>,
           label: "Carbs"
         },
         {
-          value: <%=@protein[key].to_json%>,
+          value: <%=@protein[key].round(2).to_json%>,
           label: "Protein"
         },
         {
-          value: <%=@sugar[key].to_json%>,
+          value: <%=@sugar[key].round(2).to_json%>,
           label: "Sugar"
         },
         {
-          value: <%=@fiber[key].to_json%>,
+          value: <%=@fiber[key].round(2).to_json%>,
           label: "Fiber"
         },
         {
-          value: <%=@fat[key].to_json%>,
+          value: <%=@fat[key].round(2).to_json%>,
           label: "Fat"
         }
       ];
