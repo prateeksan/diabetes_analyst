@@ -22,7 +22,7 @@
       <h4>Update This Entry</h4>
     </div>
     <div class="panel-body">
-      <form class="form-horizontal" method="POST" action="/user/<%=@user.id%>/meds/<%=@medication.id%>">
+      <form class="form-horizontal" method="POST" action="/user/<%=@user.id%>/meds/<%=@medication ? @medication.id : 99 %>">
         <div class="form-group">
           <label class="col-sm-4 control-label" for="med_name">Medicine</label>
           <div class="col-sm-8">

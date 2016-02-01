@@ -321,16 +321,20 @@ post '/user/:id/meds/:med_id' do
   @user = current_user
   @db_medication = Medication.find_by(name: params[:name])
   @medication = @user.patient_medications.find(params[:med_id])
-  if (@medication.update(
-    name: @db_medication.name,
-    user_id: current_user.id,
-    medication_id: @db_medication.id,
-    quantity: params[:quantity],
-    din: find_med_item(params[:name]),
-    medication_time: params[:medication_time]
-    ))
-  redirect "/user/#{params[:id]}/meds/view"
+  @medication.name = params[:name]
+  @medication.user_id = current_user.id
+  @medication.quantity = params[:quantity]
+  @medication.din = find_med_item(params[:name])
+  @medication.medication_time = params[:medication_time]   
+  if @db_medication
+    @medication.medication_id = @db_medication.id
+    if @medication.save
+      redirect "/user/#{params[:id]}/meds/view"
+    else
+      erb :"/medications/update_patient_medication"
+    end
   else
+    @error = "Medicine not found in database"
     erb :"/medications/update_patient_medication"
   end
 end
