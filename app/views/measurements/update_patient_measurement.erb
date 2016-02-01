@@ -1,4 +1,14 @@
 <div class = "container" style = "margin-top:15%; width:600px">
+  <% if @measurement && @measurement.errors.any? %>
+    <div class="alert alert-warning fade in">
+      <h4>Oops! The following Errors Occured!</h4>
+      <ul>
+        <% @measurement.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div class="well">
     <div>
       <h4>Update This Entry</h4>
@@ -6,33 +16,33 @@
   <div class="panel-body">
       <form class="form-horizontal" method="POST" action="/user/<%=@user.id%>/measurements/<%=@measurement.id%>">
         <div class="form-group">
-          <label  class="col-sm-2 control-label">Blood Sugar Level</label>
-          <div class="col-sm-10">
+          <label  class="col-sm-4 control-label">Blood Sugar Level</label>
+          <div class="col-sm-8">
             <input type="number" name="blood_sugar_level" value="<%=@measurement.blood_sugar_level%>" class="form-control" placeholder="Blood Sugar Level(mmol/L)">
           </div>
         </div>
         <div class="form-group">
-          <label  class="col-sm-2 control-label">Systolic Pressure</label>
-          <div class="col-sm-10">
+          <label  class="col-sm-4 control-label">Systolic Pressure</label>
+          <div class="col-sm-8">
             <input type="number" name="systolic_pressure" value="<%=@measurement.systolic_pressure%>" class="form-control" placeholder="Systolic Pressure(mm Hg)">
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-2 control-label">Diastolic Pressure</label>
-          <div class="col-sm-10">
+          <label class="col-sm-4 control-label">Diastolic Pressure</label>
+          <div class="col-sm-8">
             <input type="number" name="diastolic_pressure" value="<%=@measurement.diastolic_pressure%>" placeholder="Diastolic Pressure(mm Hg)" class="form-control">
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-2 control-label">Weight</label>
-          <div class="col-sm-10">
+          <label class="col-sm-4 control-label">Weight</label>
+          <div class="col-sm-8">
             <input type="number" name="weight" value="<%=@measurement.weight%>" class="form-control" placeholder="Weight(kg)" >
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-2 control-label">Measurement Time</label>
-          <div class="col-sm-10">
-            <input type="datetime-local" name="measurement_time" value="<%=@measurement.measurement_time%>" class="form-control">
+          <label class="col-sm-4 control-label">Measurement Time</label>
+          <div class="col-sm-8">
+            <input type="datetime-local" name="measurement_time" value="<%=date_time_ruby_to_html(@measurement.measurement_time)%>" class="form-control">
           </div>
         </div>
         <div class="form-group">
