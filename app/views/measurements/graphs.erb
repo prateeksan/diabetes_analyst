@@ -157,9 +157,9 @@
                 <div class="panel-body">
                   <% if current_user %>
                     <ul class="list-group">
-                      <li class="list-group-item">Average Weight: <span class="text-info"><%= current_user.patient_measurements.average(:weight).to_f.round(2) %></span></li>
-                      <li class="list-group-item">Highest Weight Reading: <span class="text-info"><%= current_user.patient_measurements.maximum(:weight).to_f.round(2)%></span></li>
-                      <li class="list-group-item">Lowest Weight Reading: <span class="text-info"><%= current_user.patient_measurements.maximum(:weight).to_f.round(2)%></span></li>
+                      <li class="list-group-item">Average Weight: <span class="text-info"><%= current_user.patient_measurements.average(:weight).to_f.round(2) %> kg</span></li>
+                      <li class="list-group-item">Highest Weight Reading: <span class="text-info"><%= current_user.patient_measurements.maximum(:weight).to_f.round(2)%> kg</span></li>
+                      <li class="list-group-item">Lowest Weight Reading: <span class="text-info"><%= current_user.patient_measurements.maximum(:weight).to_f.round(2)%> kg</span></li>
                     </ul>
                   <% end %>
                 </div>
