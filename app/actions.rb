@@ -117,7 +117,6 @@ post '/user/signin' do
   if @user
     if @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      #currently set to redirect to landing page. In future we can redirect to wherever the functionality is 
       redirect "/user/#{@user.id}"
     else
       @error = "incorrect pasword, try again"
@@ -173,8 +172,6 @@ post '/user/:id/edit' do
 end
 
 get '/user/:id/meds/new' do
-  # @user = current_user
-  # erb :'/medications/patient_medication'
   if current_user.id == params[:id].to_i
     erb :'/medications/new'
   else
@@ -340,7 +337,7 @@ post '/user/signup' do
     medical_history: params[:medical_history]
     )
   if @user.save
-    #currently set to redirect to landing page. In future we can redirect to wherever the functionality is 
+    session[:user_id] = @user.id
     redirect '/'
   else
     erb :'/users/new'
