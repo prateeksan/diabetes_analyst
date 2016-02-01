@@ -13,32 +13,32 @@
     <div class="panel-body">
       <form class="form-horizontal" method="POST" action="/user/<%=@user.id%>/measurements">
         <div class="form-group">
-          <label class="col-sm-4 control-label">Blood Sugar Level</label>
+          <label class="col-sm-4 control-label"><super>*</super>Blood Sugar Level</label>
           <div class="col-sm-8">
             <input type="integer" name="blood_sugar_level" class="form-control" placeholder="Blood Sugar Level(mmol/L)">
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-4 control-label">Systolic Pressure</label>
+          <label class="col-sm-4 control-label"><super>*</super>Systolic Pressure</label>
           <div class="col-sm-8">
             <input type="integer" name="systolic_pressure" class="form-control" placeholder="Systolic Pressure(mm Hg)">
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-4 control-label">Diastolic Pressure</label>
+          <label class="col-sm-4 control-label"><super>*</super>Diastolic Pressure</label>
           <div class="col-sm-8">
             <input type="integer" name="diastolic_pressure" class="form-control"
             placeholder="Diastolic Pressure(mm Hg)">
           </div>
         </div>    
         <div class="form-group">
-          <label class="col-sm-4 control-label">Weight</label>
+          <label class="col-sm-4 control-label"><super>*</super>Weight</label>
           <div class="col-sm-8">
             <input type="number" name="weight" class="form-control" placeholder="Weight(kg)">
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-4 control-label">Time</label>
+          <label class="col-sm-4 control-label"><super>*</super>Time</label>
           <div class="col-sm-8">
             <input type="time" name="measurement_time" class="form-control" placeholder="Measurement Time">
           </div>
