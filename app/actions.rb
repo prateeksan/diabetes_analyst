@@ -41,7 +41,7 @@ end
 
 # Homepage (Root path)
 get '/' do
-  erb :index
+  redirect '/user/signin'
 end
 
 get '/user/signup' do
