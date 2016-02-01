@@ -290,18 +290,22 @@ end
 post '/user/:id/foods/:food_id' do
   @user = current_user
   @db_food = Food.find_by(name: params[:name])
-  @food = @user.patient_foods.find(params[:food_id])
-  if (@food.update(
-    name: @db_food.name,
-    user_id: current_user.id,
-    food_id: @db_food.id,
-    measure: params[:measure],
-    meal_time: params[:meal_time],
-    description: params[:description]
-    ))  
-  redirect "/user/#{params[:id]}/foods/view"
+  @food = @user.patient_foods.find(params[:food_id])  
+  @food.name = params[:name]
+  @food.user_id = current_user.id
+  @food.measure = params[:measure]
+  @food.meal_time = params[:meal_time]
+  @food.description = params[:description]
+  if @db_food
+    @food.food_id = @db_food.id
+    if @food.save
+    redirect "/user/#{params[:id]}/foods/view"
+    else
+      erb :"/users/foods/update_patient_food"
+    end
   else
-    erb :"/users/foods/update_patient_food"
+    @error = "Food item not found in database"
+    erb :'/users/foods/update_patient_food'
   end
 end
 ##############################
