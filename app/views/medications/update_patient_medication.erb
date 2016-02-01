@@ -1,9 +1,9 @@
  <div class="container" style = "margin-top:15%;width:500px" >
-  <% if @patient_med && @patient_med.errors.any? %>
+  <% if @medication && @medication.errors.any? %>
     <div class="alert alert-warning fade in">
       <h4>Oops! The following Errors Occured!</h4>
       <ul>
-        <% @patient_med.errors.full_messages.each do |message| %>
+        <% @medication.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
@@ -26,25 +26,25 @@
         <div class="form-group">
           <label class="col-sm-4 control-label" for="med_name">Medicine</label>
           <div class="col-sm-8">
-            <input id="med_name" name="name" class="form-control" placeholder="Medicine Name">
+            <input id="med_name" name="name" class="form-control" value = "<%=@medication.name%>" placeholder="Medicine Name">
           </div>
         </div>
         <div class="form-group">
           <label class="col-sm-4 control-label">DIN</label>
           <div class="col-sm-8">
-            <input id="din" type="text" name="din" class="form-control" placeholder="Drug Identification Number (automatic field)">
+            <input disabled id="din" type="text" name="din" class="form-control" value = "<%=@medication.din%>" placeholder="Drug Identification Number (automatic field)">
           </div>
         </div>
         <div class="form-group">
           <label class="col-sm-4 control-label">Time</label>
           <div class="col-sm-8">
-            <input type="datetime-local" name="medication_time" class="form-control" value = <%= (@present_date_time if defined? @present_date_time) || date_time_now_for_html %>>
+            <input type="datetime-local" name="medication_time" class="form-control" value = "<%=date_time_ruby_to_html(@medication.medication_time)%>">
           </div>
         </div>    
         <div class="form-group">
           <label class="col-sm-4 control-label">Quantity</label>
           <div class="col-sm-8">
-            <input type="text" name="quantity" class="form-control" placeholder="quantity of intake">
+            <input type="text" name="quantity" class="form-control" value="<%=@medication.quantity%>" placeholder="quantity of intake">
           </div>
         </div>
         <div class="form-group">

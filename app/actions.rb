@@ -28,6 +28,13 @@ helpers do
     html_time = "#{ruby_time[0..9]}T#{ruby_time[11..15]}"
   end
 
+
+  def date_time_ruby_to_html(ruby_time)
+    ruby_time = ruby_time.to_s
+    html_time = "#{ruby_time[0..9]}T#{ruby_time[11..15]}"
+  end
+  
+
   def time_now_to_midnight
     ruby_time = (Time.now - 18000).to_s
     ruby_time[0..9]
@@ -35,6 +42,15 @@ helpers do
 
   def utc_to_local(time)
     (time-18000).to_s[0..18]
+  end
+
+  def find_med_item(med_name)
+    if med_name
+      item = Medication.find_by(name: "#{med_name}")
+      if item
+        item_din = item.din
+      end
+    end
   end
 
 end
@@ -105,8 +121,7 @@ end
 
 get "/meditem" do
   med_name = params[:med_name]
-  item = Medication.find_by(name: "#{med_name}")
-  item_din = item.din
+  item_din = find_med_item(med_name)
   content_type :json
   "#{item_din}".to_json
 end
@@ -188,7 +203,7 @@ post '/user/:id/meds' do
       user_id: current_user.id,
       medication_id: @med.id,
       quantity: params[:quantity],
-      din: params[:din],
+      din: find_med_item(params[:name]),
       medication_time: params[:medication_time]
       )
     if @patient_med.save
@@ -311,12 +326,11 @@ post '/user/:id/meds/:med_id' do
     user_id: current_user.id,
     medication_id: @db_medication.id,
     quantity: params[:quantity],
-    din: params[:din],
+    din: find_med_item(params[:name]),
     medication_time: params[:medication_time]
     ))
   redirect "/user/#{params[:id]}/meds/view"
   else
-    binding.pry
     erb :"/medications/update_patient_medication"
   end
 end
