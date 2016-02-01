@@ -1,17 +1,19 @@
 <style>
 .btn {
     position: relative;
-    background-color: #4CAF50;
     border: none;
-    color: #FFFFFF;
-    padding: 20px;
-    width: 200px;
+    color: #AC8364;
+    background: none;
+    padding: 1% 14%;
+    width: auto;
     text-align: center;
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
     text-decoration: none;
     overflow: hidden;
     cursor: pointer;
+    font-size: 110%;
+    margin-top: 1%;
 }
 
 .btn:after {
@@ -34,156 +36,192 @@
     transition: 0s  
 }
 </style>
-<div class="container">
-  <div class="row">
-    <div style="text-align:center;width:25%;margin-left:38%;margin-top:10%">
-      <h1><p class="text-primary">Daily Report</p></h1>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-3">
-      <div class="btn-group-vertical" role="group" aria-label="..." style="margin-top:10%">
-        <a href="/user/<%=@user.id%>/edit" aria-label="Left Align" class="btn btn-primary">
-            Update Profile
-        </a>
-        <br/>
-        <a href="/user/<%= @user.id %>/foods/new" aria-label="Left Align" class="btn btn-success">
-          New Meal
-        </a>
-        <a href="/user/<%=@user.id%>/meds/new " aria-label="Left Align" class="btn btn-success">
-         New Medication
-        </a>  
-        <a href="/user/<%=@user.id%>/measurements/new" aria-label="Left Align" class="btn btn-success">
-          New Measurement
-        </a>
-        <br/>
-        <a href="/user/<%=@user.id%>/measurements/graphs " aria-label="Left Align" class="btn btn-success">
-        Measurement Report
-        </a>
-        <a href="/user/<%=@user.id%>/foods/report " aria-label="Left Align" class="btn btn-success">
-        Daily Meal Report 
-        </a>
-        <br/>
-        <a href="/user/<%=@user.id%>/foods/view" aria-label="Left Align" class="btn btn-info">
-              Edit Recent Meals
-        </a>
-        <a href="/user/<%=@user.id%>/meds/view" aria-label="Left Align" class="btn btn-info">
-              Edit Recent Mecations
-        </a>
-        <a href="/user/<%=@user.id%>/measurements/view" aria-label="Left Align" class="btn btn-info">
-             Edit Recent Measurements
-        </a>
-        </div>
+<div class="container jumbotron" style="margin-top:5%; padding-top: 0;">
+      <div class="panel-heading">
+        <h3>Welcome <strong class="text-info"><%=current_user.first_name if current_user%></strong> <i class="fa fa-hand-peace-o"></i></h3>
       </div>
-    <div class="col-md-9">
-        <div class="row" style="margin-top:3%">
-          <div class="col-md-2" style="border:5px double brown;padding:2%">
+    <div class= "well">
+    <div class="row" style="margin:3% 1%; text-align:center">
+      <div class="col-md-4">
+        <div class="row" style="margin-top:3% 1%; text-align:center">
+          <div class="col-md-12 well" style="margin-right: 1%; margin-bottom: 5%; height: 450px">
+<!--             <div class="row">
+              <h5>Menu</h5>
+            </div> -->
             <div class="row">
-              <h5>Today's total calorie intake:</h5>
-            </div>
-            <div class="row">
-              <h4 class="text-info">
-              <% if @user.nutrient_counter("kcal").keys.include?(time_now_to_midnight.to_sym)%>
-              <%= kcal=@user.nutrient_counter("kcal")[time_now_to_midnight.to_sym].round(2) %> Kcal
-              <% else %>
-               <%=kcal=0%>
-              <% end %>
-              </h4>
-            </div>
-          </div>
-          <div class="col-md-2" style="margin-left:1%;border:5px double brown;padding:2%">
-            <div class="row">
-              <h5>Today's total protein intake:</h5>
-            </div>
-            <div class="row">
-            <h4 class="text-info">
-              <% if  @user.nutrient_counter("protein").keys.include?(time_now_to_midnight.to_sym)%>
-              <%= protein=@user.nutrient_counter("protein")[time_now_to_midnight.to_sym].round(2)  %> g
-               <% else %>
-              <%= protein=0 %>
-              <% end %>
-              </h4>
-            </div>
-          </div>
-          <div class="col-md-2" style="margin-left:1%;border:5px double brown;padding:2%">
-            <div class="row">
-              <h5>Today's total fat intake:</h5>
-            </div>
-            <div class="row">
-              <h4 class="text-info">
-             <% if  @user.nutrient_counter("total_fat").keys.include?(time_now_to_midnight.to_sym)%>
-              <%= fat=@user.nutrient_counter("total_fat")[time_now_to_midnight.to_sym].round(2)  %> g
-             <% else %>
-              <%= fat=0 %>
-              <% end %>
-              </h4>
-            </div>
-          </div>
-          <div class="col-md-3" style="margin-left:1%;border:5px double brown;padding:2%">
-            <div class="row">
-              <h5><super>*</super>Current BMI(Body Mass Index):</h5>
-            </div>
-            <div class="row">
-              <h4 class="text-info"><%= bmi_calculator(@user) %></h4>
-            </div>
-          </div>
-        </div>
-      <div class="row" style="margin-top:5%">
-        <div class="col-md-4" style="border:5px double brown;padding:3%">
-          <div class="row">
-            <h5>Recommended calorie intake around 30 kcal per Kg of Current Weight /day:</h5>
-          </div>
-          <div class="row">
-          <% if @user.patient_measurements.last %>
-            <h4 class="text-info"><%= kcal_t=(@user.patient_measurements.last.weight * 30).round(2) %> Kcal</h4>
-          <% else %>
-            <% kcal_t = 1 %>
-            <h4 class="text-info"> Enter a measurement first </h4>
-          <% end %>
-          </div>
-          <div class="row">
-            <div class="progress">
-              <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" id="kcalbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="-webkit-transition: none !important;transition: none !important; width: <%=kcal/kcal_t*100%>%">
+              <div class="btn-group-vertical" role="group" aria-label="..." style="margin-top:1%">
+                <a href="/user/<%=@user.id%>/edit" aria-label="Left Align" class="btn btn-success">
+                  <i class="fa fa-user"></i> Update Profile
+                </a>
+                <hr/>
+                <a href="/user/<%= @user.id %>/foods/new" aria-label="Left Align" class="btn btn-success">
+                  <i class="fa fa-cutlery"></i> New Meal
+                </a>
+                <a href="/user/<%=@user.id%>/meds/new " aria-label="Left Align" class="btn btn-success">
+                  <i class="fa fa-medkit"></i> New Medication
+                </a>  
+                <a href="/user/<%=@user.id%>/measurements/new" aria-label="Left Align" class="btn btn-success">
+                  <i class="fa fa-heartbeat"></i> New Measurement
+                </a>
+                <hr/>
+                <a href="/user/<%=@user.id%>/foods/view" aria-label="Left Align" class="btn btn-success">
+                  <i class="fa fa-cutlery"></i> Edit Recent Meals
+                </a>
+                <a href="/user/<%=@user.id%>/meds/view" aria-label="Left Align" class="btn btn-success">
+                  <i class="fa fa-medkit"></i> Edit Recent Medications
+                </a>
+                <a href="/user/<%=@user.id%>/measurements/view" aria-label="Left Align" class="btn btn-success">
+                  <i class="fa fa-heartbeat"></i> Edit Recent Measurements
+                </a>
+                <hr/>
+                <a href="/user/<%=@user.id%>/measurements/graphs " aria-label="Left Align" class="btn btn-success">
+                  <i class="fa fa-line-chart"></i> Measurement Report
+                </a>
+                <a href="/user/<%=@user.id%>/foods/report " aria-label="Left Align" class="btn btn-success">
+                  <i class="fa fa-pie-chart"></i> Daily Meal Report 
+                </a>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-md-4" style="margin-left:1%;border:5px double brown;padding:4%">
-          <div class="row">
-            <h5>Recommended protein intake /day:</h5>
-          </div>
-          <div class="row">
-          <% if @user.patient_measurements.last %>      
-            <h4 class="text-info"><%=protein_t=(@user.patient_measurements.last.weight * 0.9).round(2)%> g</h4>
-          <% else %>
-            <% protein_t=1 %>
-            <h4 class="text-info"> Enter a measurement first </h4>
-          <% end %>
-          </div>
-          <div class="row">
-            <div class="progress">
-              <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" id="proteinbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="-webkit-transition: none !important;
-    transition: none !important;
-                width:<%=protein/protein_t*100%>%">
+
+        <div class="row" style="margin-top: 0; text-align:center">
+          <div class="col-md-12 well" style="margin: 1% 0; height: 150px">
+            <div class="row">
+              <h5>Recommended limit fat intake per day</h5>
+            </div>
+            <div class="row">
+              <% if @user.patient_measurements.last %>   
+                <h4 class="text-info"><%=  fat_t=@user.patient_measurements.last.weight * 30 * 0.2  %> Kcal</h4>
+              <% else %>
+              <% fat_t=0 %>
+                <h4 class="text-info"> Enter a measurement first </h4>
+              <% end %>
             </div>
           </div>
-          </div>
         </div>
-        <div class="col-md-3" style="margin-left:1%;border:5px double brown;padding:4%">
-          <div class="row">
-            <h5>Recommanded limit fat intake /day:</h5>
+<!--         
+
+          <a href="/user/<%=@user.id%>/meds/new " aria-label="Left Align" class="btn btn-success">
+           New Medication
+          </a>  
+          <a href="/user/<%=@user.id%>/measurements/new" aria-label="Left Align" class="btn btn-success">
+            New Measurement
+          </a>
+          <a href="/user/<%=@user.id%>/measurements/graphs " aria-label="Left Align" class="btn btn-success">
+          Measurement Report
+          </a>
+          <a href="/user/<%=@user.id%>/foods/report " aria-label="Left Align" class="btn btn-success">
+          Daily Meal Report 
+          </a>
+          <a href="/user/<%=@user.id%>/foods/view" aria-label="Left Align" class="btn btn-success">
+                Edit Recent Meals
+          </a>
+          <a href="/user/<%=@user.id%>/meds/view" aria-label="Left Align" class="btn btn-success">
+                Edit Recent Mecations
+          </a>
+          <a href="/user/<%=@user.id%>/measurements/view" aria-label="Left Align" class="btn btn-success">
+               Edit Recent Measurements
+          </a>
+        </div> -->
+      </div>
+      <div class="col-md-8">
+          <div class="row" style="margin:0 1%; text-align:center">
+            <div class="col-md-6 well" style= "height: 130px">
+              <div class="row">
+                <h5>Today's total calorie intake</h5>
+              </div>
+              <div class="row">
+                <h4 class="text-info">
+                <% if @user.nutrient_counter("kcal").keys.include?(time_now_to_midnight.to_sym)%>
+                <%= kcal=@user.nutrient_counter("kcal")[time_now_to_midnight.to_sym].round(2) %> Kcal
+                <% else %>
+                 <%=kcal=0%>
+                <% end %>
+                </h4>
+              </div>
+            </div>
+            <div class="col-md-6 well" style="height: 130px">
+              <div class="row">
+                <h5>Today's total protein intake</h5>
+              </div>
+              <div class="row">
+              <h4 class="text-info">
+                <% if @user.nutrient_counter("protein").keys.include?(time_now_to_midnight.to_sym)%>
+                <%= protein=@user.nutrient_counter("protein")[time_now_to_midnight.to_sym].round(2)  %> g
+                 <% else %>
+                <%= protein=0 %>
+                <% end %>
+                </h4>
+              </div>
+            </div>
+            <div class="col-md-6 well" style="height: 130px">
+              <div class="row">
+                <h5>Today's total fat intake</h5>
+              </div>
+              <div class="row">
+                <h4 class="text-info">
+               <% if @user.nutrient_counter("total_fat").keys.include?(time_now_to_midnight.to_sym)%>
+                <%= fat=@user.nutrient_counter("total_fat")[time_now_to_midnight.to_sym].round(2)  %> g
+               <% else %>
+                <%= fat=0 %>
+                <% end %>
+                </h4>
+              </div>
+            </div>
+            <div class="col-md-6 well" style="height: 130px">
+              <div class="row">
+                <h5>Current BMI (Body Mass Index)</h5>
+              </div>
+              <div class="row">
+                <h4 class="text-info"><%= bmi_calculator(@user) %></h4>
+              </div>
+            </div>
           </div>
-          <div class="row">
-          <% if @user.patient_measurements.last %>   
-            <h4 class="text-info"><%=  fat_t=@user.patient_measurements.last.weight * 30 * 0.2  %> Kcal</h4>
-          <% else %>
-          <% fat_t=0 %>
-          <h4 class="text-info"> Enter a measurement first </h4>
-          <% end %>
+        <div class="row" style="margin:0 1%; text-align:center">
+          <div class="col-md-12 well" style="margin-right: 1%; height: 150px; padding: 4%">
+            <div class="row">
+              <h5>Recommended calorie intake per day</h5>
+            </div>
+            <div class="row">
+            <% if @user.patient_measurements.last %>
+              <h4 class="text-info"><%= kcal_t=(@user.patient_measurements.last.weight * 30).round(2) %> Kcal</h4>
+            <% else %>
+              <% kcal_t = 1 %>
+              <h4 class="text-info"> Enter a measurement first </h4>
+            <% end %>
+            </div>
+            <div class="row">
+              <div class="progress">
+                <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" id="kcalbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="-webkit-transition: none !important;transition: none !important; width: <%=kcal/kcal_t*100%>%">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 well" style="margin-right: 1%; height: 150px; padding: 4%">
+            <div class="row">
+              <h5>Recommended protein intake per day</h5>
+            </div>
+            <div class="row">
+            <% if @user.patient_measurements.last %>   
+              <h4 class="text-info"><%= protein_t=(@user.patient_measurements.last.weight * 0.9).round(2)%> g</h4>
+            <% else %>
+              <% protein_t=1 %>
+              <h4 class="text-info"> Enter a measurement first </h4>
+            <% end %>
+            </div>
+            <div class="row">
+              <div class="progress">
+                <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" id="proteinbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="-webkit-transition: none !important;
+      transition: none !important;
+                  width:<%=protein/protein_t*100%>%">
+              </div>
+            </div>
+            </div>
           </div>
         </div>
       </div>
-      </div>
+    </div>
   </div>
 </div>
 

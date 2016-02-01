@@ -92,45 +92,83 @@
 
 
    
-<div class="jumbotron" style="margin: 10% 5%">
-  <div class="row"> 
-    <div class="col-md-3" width="50%" height="50%">
-    </div>
-    <div class="col-md-6" width="50%" height="50%">
-        <div class ="container">
-          <h4>Blood sugar level</h4>
-          <canvas id="blood_sugar"></canvas>
+<div class="jumbotron" style="margin: 10% 5%; background-color: transparent;">
+  <div class="row">
+    <div class="col-md-12">
+      <div class = "container well" height="100%">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4>Blood Pressure</h4>
+              </div>
+              <div class="panel-body">
+                <% if current_user %>
+                  <ul class="list-group">
+                    <li class="list-group-item">Average Systolic Pressure: <span class="text-info"><%= current_user.patient_measurements.average(:systolic_pressure).to_f.round(2) %></span></li>
+                    <li class="list-group-item">Average Diastolic Pressure: <span class="text-info"><%= current_user.patient_measurements.average(:diastolic_pressure).to_f.round(2) %></span></li>
+                    <li class="list-group-item">Highest Systolic Pressure Reading: <span class="text-info"><%= current_user.patient_measurements.maximum(:systolic_pressure).to_f.round(2)%></span></li>
+                    <li class="list-group-item">Highest Diastolic Pressure Reading: <span class="text-info"><%= current_user.patient_measurements.maximum(:diastolic_pressure).to_f.round(2)%></span></li>
+                    <li class="list-group-item">Lowest Systolic Reading: <span class="text-info"><%= current_user.patient_measurements.maximum(:systolic_pressure).to_f.round(2)%></span></li>
+                    <li class="list-group-item">Lowest Diastolic Reading: <span class="text-info"><%= current_user.patient_measurements.maximum(:diastolic_pressure).to_f.round(2)%></span></li>
+                  </ul>
+                <% end %>
+              </div>
+            </div>
         </div>
-    </div>
-    <div class="col-md-6" width="50%" height="50%">
-    </div>
-  </div>
-  <div class="row"> 
-    <div class="col-md-3" width="50%" height="50%">
-    </div>
-    <div class="col-md-6" width="50%" height="50%"> 
-        <div class ="container">
-          <br>
-          <br>
-          <h4>Blood pressure</h4>
-          <canvas id="blood_pressure" ></canvas>
+        <div class="col-md-6">
+          <canvas id="blood_pressure" style="border: 1px solid black"></canvas>
         </div>
-    </div>
-    <div class="col-md-6" width="50%" height="50%">
+      </div>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-3" width="50%" height="50%">
-    </div> 
-    <div class="col-md-6" width="50%" height="50%"> 
-        <div class ="container">
-          <br>
-          <br>          
-          <h4>Weight</h4>
-          <canvas id="weight" ></canvas>
+      <div class="col-md-12">
+        <div class = "container well" height="100%">
+          <div class="col-md-6">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4>Blood sugar level</h4>
+                </div>
+                <div class="panel-body">
+                  <% if current_user %>
+                    <ul class="list-group">
+                      <li class="list-group-item">Average Blood Sugar Level: <span class="text-info"><%= current_user.patient_measurements.average(:blood_sugar_level).to_f.round(2) %></span></li>
+                      <li class="list-group-item">Highest Blood Sugar Reading: <span class="text-info"><%= current_user.patient_measurements.maximum(:blood_sugar_level).to_f.round(2)%></span></li>
+                      <li class="list-group-item">Lowest Blood Sugar Reading: <span class="text-info"><%= current_user.patient_measurements.maximum(:blood_sugar_level).to_f.round(2)%></span></li>
+                    </ul>
+                  <% end %>
+                </div>
+              </div>
+          </div>
+            <div class="col-md-6">
+            <canvas id="blood_sugar" style="border: 1px solid black"></canvas>
+          </div>
         </div>
-    </div>
-    <div class="col-md-6" width="50%" height="50%">
-    </div>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-md-12">
+        <div class = "container well" height="100%">
+          <div class="col-md-6">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4>Weight</h4>
+                </div>
+                <div class="panel-body">
+                  <% if current_user %>
+                    <ul class="list-group">
+                      <li class="list-group-item">Average Weight: <span class="text-info"><%= current_user.patient_measurements.average(:weight).to_f.round(2) %></span></li>
+                      <li class="list-group-item">Highest Weight Reading: <span class="text-info"><%= current_user.patient_measurements.maximum(:weight).to_f.round(2)%></span></li>
+                      <li class="list-group-item">Lowest Weight Reading: <span class="text-info"><%= current_user.patient_measurements.maximum(:weight).to_f.round(2)%></span></li>
+                    </ul>
+                  <% end %>
+                </div>
+              </div>
+          </div>
+            <div class="col-md-6">
+            <canvas id="weight" style="border: 1px solid black"></canvas>
+          </div>
+        </div>
+      </div>
   </div>
 </div>
