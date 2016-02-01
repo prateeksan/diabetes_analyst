@@ -134,7 +134,7 @@
                     <ul class="list-group">
                       <li class="list-group-item">Average Blood Sugar Level: <span class="text-info"><%= current_user.patient_measurements.average(:blood_sugar_level).to_f.round(2) %> mmol/L</span></li>
                       <li class="list-group-item">Highest Blood Sugar Reading: <span class="text-info"><%= current_user.patient_measurements.maximum(:blood_sugar_level).to_f.round(2)%> mmol/L</span></li>
-                      <li class="list-group-item">Lowest Blood Sugar Reading: <span class="text-info"><%= current_user.patient_measurements.maximum(:blood_sugar_level).to_f.round(2)%> mmol/L</span></li>
+                      <li class="list-group-item">Lowest Blood Sugar Reading: <span class="text-info"><%= current_user.patient_measurements.minimum(:blood_sugar_level).to_f.round(2)%> mmol/L</span></li>
                     </ul>
                   <% end %>
                 </div>
@@ -159,7 +159,7 @@
                     <ul class="list-group">
                       <li class="list-group-item">Average Weight: <span class="text-info"><%= current_user.patient_measurements.average(:weight).to_f.round(2) %> Kg</span></li>
                       <li class="list-group-item">Highest Weight Reading: <span class="text-info"><%= current_user.patient_measurements.maximum(:weight).to_f.round(2)%> Kg</span></li>
-                      <li class="list-group-item">Lowest Weight Reading: <span class="text-info"><%= current_user.patient_measurements.maximum(:weight).to_f.round(2)%> Kg</span></li>
+                      <li class="list-group-item">Lowest Weight Reading: <span class="text-info"><%= current_user.patient_measurements.minimum(:weight).to_f.round(2)%> Kg</span></li>
                     </ul>
                   <% end %>
                 </div>
