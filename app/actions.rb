@@ -28,6 +28,13 @@ helpers do
     html_time = "#{ruby_time[0..9]}T#{ruby_time[11..15]}"
   end
 
+
+  def date_time_ruby_to_html(ruby_time)
+    ruby_time = ruby_time.to_s
+    html_time = "#{ruby_time[0..9]}T#{ruby_time[11..15]}"
+  end
+  
+
   def time_now_to_midnight
     ruby_time = (Time.now - 18000).to_s
     ruby_time[0..9]
@@ -35,6 +42,15 @@ helpers do
 
   def utc_to_local(time)
     (time-18000).to_s[0..18]
+  end
+
+  def find_med_item(med_name)
+    if med_name
+      item = Medication.find_by(name: "#{med_name}")
+      if item
+        item_din = item.din
+      end
+    end
   end
 
 end
@@ -105,8 +121,7 @@ end
 
 get "/meditem" do
   med_name = params[:med_name]
-  item = Medication.find_by(name: "#{med_name}")
-  item_din = item.din
+  item_din = find_med_item(med_name)
   content_type :json
   "#{item_din}".to_json
 end
@@ -188,7 +203,7 @@ post '/user/:id/meds' do
       user_id: current_user.id,
       medication_id: @med.id,
       quantity: params[:quantity],
-      din: params[:din],
+      din: find_med_item(params[:name]),
       medication_time: params[:medication_time]
       )
     if @patient_med.save
@@ -275,18 +290,22 @@ end
 post '/user/:id/foods/:food_id' do
   @user = current_user
   @db_food = Food.find_by(name: params[:name])
-  @food = @user.patient_foods.find(params[:food_id])
-  if (@food.update(
-    name: @db_food.name,
-    user_id: current_user.id,
-    food_id: @db_food.id,
-    measure: params[:measure],
-    meal_time: params[:meal_time],
-    description: params[:description]
-    ))  
-  redirect "/user/#{params[:id]}/foods/view"
+  @food = @user.patient_foods.find(params[:food_id])  
+  @food.name = params[:name]
+  @food.user_id = current_user.id
+  @food.measure = params[:measure]
+  @food.meal_time = params[:meal_time]
+  @food.description = params[:description]
+  if @db_food
+    @food.food_id = @db_food.id
+    if @food.save
+    redirect "/user/#{params[:id]}/foods/view"
+    else
+      erb :"/users/foods/update_patient_food"
+    end
   else
-    erb :"/users/foods/update_patient_food"
+    @error = "Food item not found in database"
+    erb :'/users/foods/update_patient_food'
   end
 end
 ##############################
@@ -306,17 +325,20 @@ post '/user/:id/meds/:med_id' do
   @user = current_user
   @db_medication = Medication.find_by(name: params[:name])
   @medication = @user.patient_medications.find(params[:med_id])
-  if (@medication.update(
-    name: @db_medication.name,
-    user_id: current_user.id,
-    medication_id: @db_medication.id,
-    quantity: params[:quantity],
-    din: params[:din],
-    medication_time: params[:medication_time]
-    ))
-  redirect "/user/#{params[:id]}/meds/view"
+  @medication.name = params[:name]
+  @medication.user_id = current_user.id
+  @medication.quantity = params[:quantity]
+  @medication.din = find_med_item(params[:name])
+  @medication.medication_time = params[:medication_time]   
+  if @db_medication
+    @medication.medication_id = @db_medication.id
+    if @medication.save
+      redirect "/user/#{params[:id]}/meds/view"
+    else
+      erb :"/medications/update_patient_medication"
+    end
   else
-    binding.pry
+    @error = "Medicine not found in database"
     erb :"/medications/update_patient_medication"
   end
 end
