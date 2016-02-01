@@ -108,8 +108,8 @@
                     <li class="list-group-item">Average Diastolic Pressure: <span class="text-info"><%= current_user.patient_measurements.average(:diastolic_pressure).to_f.round(2) %></span></li>
                     <li class="list-group-item">Highest Systolic Pressure Reading: <span class="text-info"><%= current_user.patient_measurements.maximum(:systolic_pressure).to_f.round(2)%></span></li>
                     <li class="list-group-item">Highest Diastolic Pressure Reading: <span class="text-info"><%= current_user.patient_measurements.maximum(:diastolic_pressure).to_f.round(2)%></span></li>
-                    <li class="list-group-item">Lowest Systolic Reading: <span class="text-info"><%= current_user.patient_measurements.maximum(:systolic_pressure).to_f.round(2)%></span></li>
-                    <li class="list-group-item">Lowest Diastolic Reading: <span class="text-info"><%= current_user.patient_measurements.maximum(:diastolic_pressure).to_f.round(2)%></span></li>
+                    <li class="list-group-item">Lowest Systolic Reading: <span class="text-info"><%= current_user.patient_measurements.minimum(:systolic_pressure).to_f.round(2)%></span></li>
+                    <li class="list-group-item">Lowest Diastolic Reading: <span class="text-info"><%= current_user.patient_measurements.minimum(:diastolic_pressure).to_f.round(2)%></span></li>
                   </ul>
                 <% end %>
               </div>
