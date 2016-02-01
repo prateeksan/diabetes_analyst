@@ -5,7 +5,8 @@ class User < ActiveRecord::Base
   has_many :patient_foods
   has_many :patient_medications
 
-  validates :username, :first_name, :last_name, :email, presence: true
+  validates :username, :height, :first_name, :last_name, :email, presence: true
+  validates :username, uniqueness: true
 
   
   def extracting_measurements_for_graph(measurement)
