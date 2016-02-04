@@ -29,6 +29,7 @@ GEM
     minitest (5.8.3)
     multi_json (1.11.2)
     pdf-core (0.6.0)
+    pg (0.18.4)
     prawn (2.0.2)
       pdf-core (~> 0.6.0)
       ttfunk (~> 1.4.0)
@@ -90,6 +91,7 @@ DEPENDENCIES
   bcrypt
   faker
   googlecharts
+  pg
   prawn
   pry
   puma
