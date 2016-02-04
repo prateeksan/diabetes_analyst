@@ -439,7 +439,6 @@ get '/report' do
   @sugar_values = @user.extracting_measurements_for_graph("sugar_level")
   @pressure_values = @user.extracting_measurements_for_graph("pressure")
   @weight_values = @user.extracting_measurements_for_graph("weight")
-  #binding.pry
   image_link = Gchart.line_xy( :theme => :thirty7signals, 
                       :title => 'Blood sugar level',
                       :data => [(1..@sugar_values[0].length).to_a,@sugar_values[1]],

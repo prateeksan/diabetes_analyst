@@ -1,5 +1,4 @@
 require 'csv'
-require 'pry'
 
 data = CSV.read("./db/import/food_table.csv")#, { encoding: "UTF-8", headers: true, header_converters: :symbol, converters: :all})
 header = ["number","name","measure","weight","kcal","kj","protein","carbohydrate",

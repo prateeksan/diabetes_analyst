@@ -1,5 +1,4 @@
 require 'csv'
-require 'pry'
 
 
 #the test.csv file is just like medicines csv but had the percent % signs removed .
@@ -18,5 +17,3 @@ end
 meds.each do |medication|
   Medication.create(medication)
 end
-# binding.pry
-# puts ""
