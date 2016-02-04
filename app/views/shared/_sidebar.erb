@@ -1,0 +1,35 @@
+<div class="row">
+              <div class="btn-group-vertical" role="group" aria-label="..." style="margin-top:1%">
+                <a href="/user/<%=@user.id%>/edit" aria-label="Left Align" class="btn btn-success">
+                  <i class="fa fa-user"></i> Update Profile
+                </a>
+                <hr/>
+                <a href="/user/<%= @user.id %>/foods/new" aria-label="Left Align" class="btn btn-success">
+                  <i class="fa fa-cutlery"></i> New Meal
+                </a>
+                <a href="/user/<%=@user.id%>/meds/new " aria-label="Left Align" class="btn btn-success">
+                  <i class="fa fa-medkit"></i> New Medication
+                </a>  
+                <a href="/user/<%=@user.id%>/measurements/new" aria-label="Left Align" class="btn btn-success">
+                  <i class="fa fa-heartbeat"></i> New Reading
+                </a>
+                <hr/>
+                <a href="/user/<%=@user.id%>/foods/view" aria-label="Left Align" class="btn btn-success">
+                  <i class="fa fa-cutlery"></i> Recent Meals
+                </a>
+                <a href="/user/<%=@user.id%>/meds/view" aria-label="Left Align" class="btn btn-success">
+                  <i class="fa fa-medkit"></i> Recent Medications
+                </a>
+                <a href="/user/<%=@user.id%>/measurements/view" aria-label="Left Align" class="btn btn-success">
+                  <i class="fa fa-heartbeat"></i> Recent Readings
+                </a>
+                <hr/>
+                <a href="/user/<%=@user.id%>/measurements/graphs " aria-label="Left Align" class="btn btn-success">
+                  <i class="fa fa-line-chart"></i> Readings Report
+                </a>
+                <a href="/user/<%=@user.id%>/foods/report " aria-label="Left Align" class="btn btn-success">
+                  <i class="fa fa-pie-chart"></i> Daily Meal Report 
+                </a>
+              </div>
+            </div>
+          </div>
