@@ -66,7 +66,9 @@ end
 20.times do
   med = PatientMedication.new
   med.user = User.all.sample
-  med.medication_id = (1..500).to_a.sample
+  arr = (1..1000).to_a
+  arr = arr.select{|x| x%5 != 0}
+  med.medication_id = arr.sample
   med.din = Medication.find(med.medication_id).din
   med.name = Medication.find(med.medication_id).name
   med.quantity = (1..5).to_a.sample
