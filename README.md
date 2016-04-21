@@ -4,12 +4,12 @@ Built by @edumonteiro, @fantasticjimmy, @prateeksan
 
 >FreshPulse is an app built to make life a little easier for diabetes patients. It offers an interactive and robust way to record meals, medications and medical readings. Furthermore, it uses this data to monitor BMI and nutritional intakes, make dietary recommendations and generate reports which may be equally useful for the patient and his or her doctor. 
 
-### Tech-Stack
+## Tech-Stack
 
 1. __Server-Side__: _Ruby -v 2.2.3_, Sinatra (Sinatra-Contrib, Sintra-ActiveRecord, Sintra-Partial), Rake, ActiveSupport, Faker, Prawn, Puma, Tux, Google Charts.
 2. __Client-Side__: HTML/CSS, Normalize CSS, Bootstrap, Font-Awesome, Javascript, JQuery, ChartJS, ClassieJS
 
-### Demo
+## Demo
 
 __Important Note__: FreshPulse's current deployment is for demonstration purposes only. Please do not use this site for any other purposes. It has __not__ been built or verified by medical professionals and none of its content should be treated as a credible source of information or advice. If you visit our site to test it's features, please keep the aforementioned in mind and treat it as nothing more than an experimental model.
 
@@ -18,7 +18,7 @@ __Important Note__: FreshPulse's current deployment is for demonstration purpose
 + Username: test0
 + Password: 1234
 
-### Features
+## Features
 
 Following are a few of FreshPulse's nifty features:
 
@@ -29,7 +29,7 @@ Following are a few of FreshPulse's nifty features:
 + Receive daily nutritional recommendations based on BMI calculations, recent meals and other relevant factors. 
 + All this and more in a clean and compact user-interface!
 
-### Screenshots
+## Screenshots
 
 #### Log In Screen
 
