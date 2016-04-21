@@ -31,30 +31,37 @@ Following are a few of FreshPulse's nifty features:
 
 ### Screenshots
 
-##### Log In Screen
+#### Log In Screen
+
 User authentication and encryption architecture built using BCrypt. The app maintains sessions for previously authenticated users. 
 ![Signin](https://s3.amazonaws.com/freshpulse/readme_images/1_signin.jpg)
 
-##### Sign Up Page
+#### Sign Up Page
+
 Form fields contain server-side validations to ensure all important information is submitted in proper format.
 ![Signup](https://s3.amazonaws.com/freshpulse/readme_images/2_signup.jpg)
 
-##### Dashboard
+#### Dashboard
+
 The user's personalized dashboard is accessible upon login. It links to all other components of the app and displays important information about daily nutritional intake, BMI measurements, and dietary recommendations.
 ![Signin](https://s3.amazonaws.com/freshpulse/readme_images/3_dashboard.jpg)
 
-##### Meal Reports
+#### Meal Reports
+
 A breakdown of daily nutritional intake along with a list of all foods consumed per day and the total calorific consumption. 
 ![Signup](https://s3.amazonaws.com/freshpulse/readme_images/4_meal_reports.jpg)
 
-##### New Entry Forms
+#### New Entry Forms
+
 Forms for recording meals, medications, blood pressure readings, and blood sugar level readings. The form displayed below is for recording medications. FreshPulse comes loaded with a database of **every single medicine legally registered in Canada as of February 2016**, along with its Drug Identification Number. This database is integrated with the autocomplete feature of the input field for new medicines. The Drug Identification Number is updated automatically and can be shown to a doctor or pharmacist for precise drug identification (A similar database is also integrated for food items and their estimated nutritional value).
 ![Signup](https://s3.amazonaws.com/freshpulse/readme_images/5_autocomplete.jpg)
 
-##### Entry Logs
+#### Entry Logs
+
 Automatically generated logs for all recorded meals, medications and readings in the user's recent history. All logs are categorized by date and ordered by time of consumption/reading. A user can edit previous entries recorded in the logs. 
 ![Signup](https://s3.amazonaws.com/freshpulse/readme_images/6_foods_index.jpg)
 
-##### Readings Report
+#### Readings Report
+
 A patient-friendly and doctor-friendly report containing the user's blood pressure readings, blood sugar levels and weight readings in interactive graphs. This page also contains other important analytics computed by the app including the average, highest and lowest readings for each of the aforementioned parameters.
 ![Signup](https://s3.amazonaws.com/freshpulse/readme_images/7_readings.jpg)
