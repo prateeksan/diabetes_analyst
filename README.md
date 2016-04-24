@@ -1,4 +1,4 @@
-# Fresh Pulse
+# FreshPulse
 
 Built by @edumonteiro, @fantasticjimmy, @prateeksan
 
